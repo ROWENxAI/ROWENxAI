@@ -1,4 +1,4 @@
-// Copyright 2026 PokeClaw (agents.io). All rights reserved.
+﻿// Copyright 2026 PokeClaw (agents.io). All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
 package io.agents.pokeclaw.agent.llm
@@ -267,10 +267,54 @@ object LocalModelManager {
      * Get the directory where models are stored.
      */
     fun getModelDir(context: Context): File {
+        // Use /sdcard/PokeClaw/models/ so models survive app uninstall/reinstall.
+        val persistentDir = File(android.os.Environment.getExternalStorageDirectory(), "PokeClaw/models")
+        if (prepareModelDirectory(persistentDir, ::canWriteToDirectory)) {
+            migrateModelsIfNeeded(context, persistentDir)
+            return persistentDir
+        }
+        // Fallback to app-scoped external (will be deleted on uninstall)
         return resolveUsableModelDir(
             externalRoot = context.getExternalFilesDir(null),
             internalRoot = context.filesDir,
         )
+    }
+
+    private fun migrateModelsIfNeeded(context: Context, targetDir: File) {
+        val candidates = listOfNotNull(
+            context.getExternalFilesDir(null)?.let { File(it, "models") },
+            File(context.filesDir, "models"),
+        )
+        for (oldDir in candidates) {
+            if (!oldDir.isDirectory || oldDir.absolutePath == targetDir.absolutePath) continue
+            val files = oldDir.listFiles() ?: continue
+            for (file in files) {
+                if (!file.isFile) continue
+                val targetFile = File(targetDir, file.name)
+                if (targetFile.exists()) { file.delete(); continue }
+                try {
+                    if (!file.renameTo(targetFile)) {
+                        file.copyTo(targetFile, overwrite = false)
+                        file.delete()
+                    }
+                    XLog.i(TAG, "Migrated model: ${file.name} -> ${targetDir.absolutePath}")
+                } catch (e: Exception) {
+                    XLog.w(TAG, "Migration failed for ${file.name}: ${e.message}")
+                }
+            }
+        }
+        // Fix saved model path if it points to old location
+        val savedPath = io.agents.pokeclaw.utils.KVUtils.getLocalModelPath()
+        if (savedPath.isNotBlank()) {
+            val savedFile = File(savedPath)
+            if (!savedFile.exists()) {
+                val newFile = File(targetDir, savedFile.name)
+                if (newFile.exists()) {
+                    io.agents.pokeclaw.utils.KVUtils.setLocalModelPath(newFile.absolutePath)
+                    XLog.i(TAG, "Fixed saved model path: $savedPath -> ${newFile.absolutePath}")
+                }
+            }
+        }
     }
 
     internal fun resolveUsableModelDir(
@@ -458,22 +502,51 @@ object LocalModelManager {
             XLog.w(TAG, "Could not check storage, proceeding anyway", e)
         }
 
+        // Build a list of mirror URLs to try (primary + China mirror fallback)
+        val mirrorUrls = buildList {
+            add(model.url)
+            if (model.url.contains("huggingface.co")) {
+                add(model.url.replace("huggingface.co", "hf-mirror.com"))
+            }
+        }
+
         try {
             val client = OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
+                .followRedirects(true)
+                .followSslRedirects(true)
                 .build()
 
-            // Support resume
-            val existingBytes = if (tempFile.exists()) tempFile.length() else 0L
-
-            val requestBuilder = Request.Builder().url(model.url)
-            if (existingBytes > 0) {
-                requestBuilder.addHeader("Range", "bytes=$existingBytes-")
-                XLog.i(TAG, "Resuming download from byte $existingBytes")
+            var existingBytes = if (tempFile.exists()) tempFile.length() else 0L
+            var response: okhttp3.Response? = null
+            for (url in mirrorUrls) {
+                try {
+                    val rb = Request.Builder().url(url)
+                        .header("User-Agent", "PokeClaw/${io.agents.pokeclaw.BuildConfig.VERSION_NAME}")
+                    if (existingBytes > 0) {
+                        rb.addHeader("Range", "bytes=${existingBytes}-")
+                        XLog.i(TAG, "Resuming download from byte $existingBytes via $url")
+                    } else {
+                        XLog.i(TAG, "Trying download from $url")
+                    }
+                    val resp = client.newCall(rb.build()).execute()
+                    if (resp.isSuccessful || resp.code == 206) {
+                        response = resp
+                        break
+                    } else {
+                        XLog.w(TAG, "Mirror $url returned HTTP ${resp.code}, trying next...")
+                        resp.close()
+                    }
+                } catch (e: Exception) {
+                    XLog.w(TAG, "Mirror $url failed: ${e.message}, trying next...")
+                }
             }
 
-            val response = client.newCall(requestBuilder.build()).execute()
+            if (response == null) {
+                callback.onError("Download failed: all mirrors unreachable. Check your network connection.")
+                return
+            }
 
             if (!response.isSuccessful && response.code != 206) {
                 callback.onError("Download failed: HTTP ${response.code}")

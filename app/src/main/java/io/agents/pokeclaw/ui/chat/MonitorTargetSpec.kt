@@ -12,7 +12,7 @@ data class MonitorTargetSpec(
         get() = "$label on $app"
 
     companion object {
-        val supportedApps = listOf("WhatsApp", "Telegram", "Messages", "LINE", "WeChat")
+        val supportedApps = listOf("WhatsApp", "Telegram", "Messages", "LINE", "WeChat", "QQ", "DingTalk", "Feishu", "WeCom", "Weibo", "Soul", "Momo", "Tantan")
     }
 }
 
@@ -42,7 +42,8 @@ object MonitorTargetParser {
         var cleaned = lower
         val removeWords = listOf(
             "monitoring", "monitor", "auto-reply", "auto reply", "watching", "watch",
-            "on whatsapp", "on telegram", "on messages", "on google messages", "on sms", "on wechat", "on line",
+            "on whatsapp", "on telegram", "on messages", "on google messages", "on sms", "on wechat", "on line", "on qq", "on dingtalk", "on feishu", "on wecom", "on weibo",
+            "在微信", "在qq", "在钉钉", "在飞书", "在微博", "在soul", "在陌陌", "在探探",
             "messages", "message", "'s", "'s", "for", "from",
             "please", "can you", "start", "enable", "begin", "help me",
         )

@@ -151,7 +151,7 @@ The available Skills are listed below. Based on the user's request, select the b
 ### Skill: Send Message
 Purpose: Send a single message to another person in a messaging app. Note: this sends one message, it does not start auto-reply monitoring.
 Steps:
-1. Call send_message(contact=<person mentioned by user>, app=<app mentioned by user or default WhatsApp>, message=<content to send>)
+1. Call send_message(contact=<person mentioned by user>, app=<app mentioned by user or default WhatsApp>, message=<content to send>)  // Supported apps include WhatsApp, Telegram, WeChat, QQ, DingTalk, Feishu, Weibo etc.
 2. Call finish to confirm the message was sent
 
 ### Skill: Monitor & Auto-Reply

@@ -109,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="Step 1"
+                    android:text="@string/floating_step"
                     android:textColor="@color/colorBrandOnPrimary"
                     android:textSize="11dp"
                     android:textStyle="bold"
@@ -122,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Tap to stop"
+                android:text="@string/floating_tap_stop"
                 android:textColor="@color/colorBrandOnPrimary"
                 android:alpha="0.6"
                 android:textSize="8dp" />

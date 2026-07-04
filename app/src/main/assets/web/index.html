@@ -169,11 +169,11 @@ input:focus {
     <div class="card dingtalk">
       <div class="card-title"><span class="dot"></span><span data-i18n="dingtalk"></span></div>
       <div class="field">
-        <label>Client ID</label>
+        <label data-i18n="label_client_id"></label>
         <input type="text" id="dingtalkAppKey" data-i18n-placeholder="ph_dingtalk_id" autocomplete="off">
       </div>
       <div class="field">
-        <label>Client Secret</label>
+        <label data-i18n="label_client_secret"></label>
         <div class="input-wrap">
           <input type="password" id="dingtalkAppSecret" data-i18n-placeholder="ph_dingtalk_secret" autocomplete="off">
           <button class="toggle-eye" onclick="togglePassword('dingtalkAppSecret', this)" data-i18n-title="toggle_visibility"></button>
@@ -184,11 +184,11 @@ input:focus {
     <div class="card feishu">
       <div class="card-title"><span class="dot"></span><span data-i18n="feishu"></span></div>
       <div class="field">
-        <label>App ID</label>
+        <label data-i18n="label_app_id"></label>
         <input type="text" id="feishuAppId" data-i18n-placeholder="ph_feishu_id" autocomplete="off">
       </div>
       <div class="field">
-        <label>App Secret</label>
+        <label data-i18n="label_app_secret"></label>
         <div class="input-wrap">
           <input type="password" id="feishuAppSecret" data-i18n-placeholder="ph_feishu_secret" autocomplete="off">
           <button class="toggle-eye" onclick="togglePassword('feishuAppSecret', this)" data-i18n-title="toggle_visibility"></button>
@@ -199,11 +199,11 @@ input:focus {
     <div class="card qq">
       <div class="card-title"><span class="dot"></span>QQ</div>
       <div class="field">
-        <label>App ID</label>
+        <label data-i18n="label_app_id"></label>
         <input type="text" id="qqAppId" data-i18n-placeholder="ph_qq_id" autocomplete="off">
       </div>
       <div class="field">
-        <label>App Secret</label>
+        <label data-i18n="label_app_secret"></label>
         <div class="input-wrap">
           <input type="password" id="qqAppSecret" data-i18n-placeholder="ph_qq_secret" autocomplete="off">
           <button class="toggle-eye" onclick="togglePassword('qqAppSecret', this)" data-i18n-title="toggle_visibility"></button>
@@ -214,7 +214,7 @@ input:focus {
     <div class="card discord">
       <div class="card-title"><span class="dot"></span>Discord</div>
       <div class="field">
-        <label>Bot Token</label>
+        <label data-i18n="label_bot_token"></label>
         <div class="input-wrap">
           <input type="password" id="discordBotToken" data-i18n-placeholder="ph_discord_token" autocomplete="off">
           <button class="toggle-eye" onclick="togglePassword('discordBotToken', this)" data-i18n-title="toggle_visibility"></button>
@@ -226,7 +226,7 @@ input:focus {
     <div class="card telegram">
       <div class="card-title"><span class="dot"></span>Telegram</div>
       <div class="field">
-        <label>Bot Token</label>
+        <label data-i18n="label_bot_token"></label>
         <div class="input-wrap">
           <input type="password" id="telegramBotToken" data-i18n-placeholder="ph_telegram_token" autocomplete="off">
           <button class="toggle-eye" onclick="togglePassword('telegramBotToken', this)" data-i18n-title="toggle_visibility"></button>
@@ -269,6 +269,11 @@ const i18nMessages = {
     discord_tip: '需在 Discord Developer Portal 开启 Message Content Intent',
     ph_telegram_token: '输入 Telegram Bot Token',
     telegram_tip: '通过 @BotFather 创建 Bot 并获取 Token',
+    label_client_id: 'Client ID',
+    label_client_secret: 'Client Secret',
+    label_app_id: 'App ID',
+    label_app_secret: 'App Secret',
+    label_bot_token: 'Bot Token',
     toggle_visibility: '显示/隐藏',
     save_btn: '保存配置',
     saving: '保存中...',
@@ -301,6 +306,11 @@ const i18nMessages = {
     discord_tip: 'Enable Message Content Intent in Discord Developer Portal',
     ph_telegram_token: 'Enter Telegram Bot Token',
     telegram_tip: 'Create a bot via @BotFather and get the token',
+    label_client_id: 'Client ID',
+    label_client_secret: 'Client Secret',
+    label_app_id: 'App ID',
+    label_app_secret: 'App Secret',
+    label_bot_token: 'Bot Token',
     toggle_visibility: 'Show/Hide',
     save_btn: 'Save',
     saving: 'Saving...',
@@ -333,6 +343,11 @@ const i18nMessages = {
     discord_tip: 'Discord Developer Portal で Message Content Intent を有効にしてください',
     ph_telegram_token: 'Telegram Bot Token を入力',
     telegram_tip: '@BotFather で Bot を作成して Token を取得してください',
+    label_client_id: 'Client ID',
+    label_client_secret: 'Client Secret',
+    label_app_id: 'App ID',
+    label_app_secret: 'App Secret',
+    label_bot_token: 'Bot Token',
     toggle_visibility: '表示/非表示',
     save_btn: '保存',
     saving: '保存中...',
@@ -346,7 +361,7 @@ function detectLang() {
   const lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
   if (lang.startsWith('zh')) return 'zh';
   if (lang.startsWith('ja')) return 'ja';
-  return 'en';
+  return 'zh';
 }
 
 const currentLang = detectLang();

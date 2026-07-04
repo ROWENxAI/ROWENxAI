@@ -56,7 +56,7 @@ Rules:
 - If the task involves messaging (WhatsApp, SMS, email) → type: "agent" (requires UI navigation)
 - If task is ambiguous between skill and agent, prefer agent for complex tasks, skill for simple ones
 - sub_goal should be a simplified version of the task for the agent loop
-- app should be a common app name like "YouTube", "WhatsApp", "Chrome", "Clock"
+- app should be a common app name like "YouTube", "WhatsApp", "WeChat", "Douyin", "Chrome", "Clock"
 """
     }
 

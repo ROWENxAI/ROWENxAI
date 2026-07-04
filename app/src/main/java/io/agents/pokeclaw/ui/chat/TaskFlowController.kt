@@ -1,4 +1,4 @@
-// Copyright 2026 PokeClaw (agents.io). All rights reserved.
+﻿// Copyright 2026 PokeClaw (agents.io). All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
 package io.agents.pokeclaw.ui.chat
@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import io.agents.pokeclaw.R
 import io.agents.pokeclaw.AppCapabilityCoordinator
 import io.agents.pokeclaw.AppViewModel
 import io.agents.pokeclaw.ServiceBindingState
@@ -63,15 +64,15 @@ class TaskFlowController(
 
     fun sendTask(text: String) {
         if (appViewModel.isTaskRunning()) {
-            addSystem("Another task is still running. Stop it first.")
-            onTaskTerminal?.invoke(TaskEvent.Failed("Another task is still running. Stop it first."))
+            addSystem(activity.getString(R.string.task_another_running))
+            onTaskTerminal?.invoke(TaskEvent.Failed(activity.getString(R.string.task_another_running)))
             return
         }
 
         if (ModelConfigRepository.snapshot().isLocalActive() && isLikelyMonitorRequest(text)) {
             addUser(text)
-            addSystem("Local mode starts monitoring from the Background card. Open Background, choose the app/contact, then tap Start Monitoring.")
-            onTaskTerminal?.invoke(TaskEvent.Failed("Local mode starts monitoring from the Background card."))
+            addSystem(activity.getString(R.string.task_local_monitor_hint))
+            onTaskTerminal?.invoke(TaskEvent.Failed(activity.getString(R.string.task_local_monitor_hint)))
             return
         }
 
@@ -92,11 +93,11 @@ class TaskFlowController(
                 if (canRunWithoutAccessibility(text)) {
                     XLog.i(TAG, "sendTask: allowing non-interactive task without Accessibility")
                 } else {
-                Toast.makeText(activity, "Enable Accessibility Service to run tasks", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, activity.getString(R.string.toast_enable_accessibility), Toast.LENGTH_LONG).show()
                 addSystem("⚠️ Task mode needs Accessibility Service enabled. Opening Settings...")
                 openSettings()
                 sendTaskRetryCount = 0
-                onTaskTerminal?.invoke(TaskEvent.Failed("Accessibility Service is required for this task."))
+                onTaskTerminal?.invoke(TaskEvent.Failed(activity.getString(R.string.task_accessibility_required)))
                 return
                 }
             }
@@ -111,25 +112,25 @@ class TaskFlowController(
                     XLog.i(TAG, "sendTask: allowing non-interactive task while Accessibility connects")
                 } else {
                 if (sendTaskRetryCount >= 1) {
-                    Toast.makeText(activity, "Accessibility service not connected. Try toggling it off and on.", Toast.LENGTH_LONG).show()
-                    addSystem("Accessibility service didn't connect. Try toggling it off and on in Settings.")
+                    Toast.makeText(activity, activity.getString(R.string.toast_accessibility_not_connected), Toast.LENGTH_LONG).show()
+                    addSystem(activity.getString(R.string.task_accessibility_toggle_hint))
                     openSettings()
                     sendTaskRetryCount = 0
-                    onTaskTerminal?.invoke(TaskEvent.Failed("Accessibility service did not connect."))
+                    onTaskTerminal?.invoke(TaskEvent.Failed(activity.getString(R.string.task_accessibility_required)))
                     return
                 }
                 sendTaskRetryCount++
-                addSystem("Accessibility service connecting, please wait...")
+                addSystem(activity.getString(R.string.task_accessibility_connecting))
                 executor.submit {
                     val connected = ClawAccessibilityService.awaitRunning(5000)
                     activity.runOnUiThread {
                         if (connected) {
                             sendTask(text)
                         } else {
-                            Toast.makeText(activity, "Accessibility service didn't connect", Toast.LENGTH_LONG).show()
-                            addSystem("Accessibility service didn't connect. Go to Settings and toggle it off then on.")
+                            Toast.makeText(activity, activity.getString(R.string.toast_accessibility_not_connected), Toast.LENGTH_LONG).show()
+                            addSystem(activity.getString(R.string.task_accessibility_toggle_hint))
                             sendTaskRetryCount = 0
-                            onTaskTerminal?.invoke(TaskEvent.Failed("Accessibility service did not connect."))
+                            onTaskTerminal?.invoke(TaskEvent.Failed(activity.getString(R.string.task_accessibility_required)))
                         }
                     }
                 }
@@ -146,11 +147,11 @@ class TaskFlowController(
                 if (canRunWithoutAccessibility(text)) {
                     XLog.i(TAG, "sendTask: allowing non-interactive task while Accessibility is degraded")
                 } else {
-                    Toast.makeText(activity, "Accessibility service disconnected. Open Settings and toggle it back on.", Toast.LENGTH_LONG).show()
-                    addSystem("Accessibility service disconnected. Open Settings and toggle it off then on.")
+                    Toast.makeText(activity, activity.getString(R.string.toast_accessibility_disconnected), Toast.LENGTH_LONG).show()
+                    addSystem(activity.getString(R.string.toast_accessibility_disconnected))
                     openSettings()
                     sendTaskRetryCount = 0
-                    onTaskTerminal?.invoke(TaskEvent.Failed("Accessibility service is disconnected."))
+                    onTaskTerminal?.invoke(TaskEvent.Failed(activity.getString(R.string.task_accessibility_required)))
                     return
                 }
             }
@@ -163,8 +164,8 @@ class TaskFlowController(
         uiState.isTaskRunning.value = false
 
         if (!KVUtils.hasLlmConfig()) {
-            Toast.makeText(activity, "Configure LLM in Settings first", Toast.LENGTH_LONG).show()
-            onTaskTerminal?.invoke(TaskEvent.Failed("Configure LLM in Settings first."))
+            Toast.makeText(activity, activity.getString(R.string.toast_configure_llm_first), Toast.LENGTH_LONG).show()
+            onTaskTerminal?.invoke(TaskEvent.Failed(activity.getString(R.string.toast_configure_llm_first)))
             return
         }
 

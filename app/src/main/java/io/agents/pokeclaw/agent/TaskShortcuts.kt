@@ -66,6 +66,96 @@ object TaskShortcuts {
         "music"      to "com.google.android.music",
         "play store" to "com.android.vending",
         "playstore"  to "com.android.vending",
+
+        // ── 国内主流应用 ──
+        // 社交 / 通讯
+        "微信"        to "com.tencent.mm",
+        "wechat"      to "com.tencent.mm",
+        "qq"          to "com.tencent.mobileqq",
+        "微博"        to "com.sina.weibo",
+        "weibo"       to "com.sina.weibo",
+        "小红书"      to "com.xingin.xhs",
+        "xiaohongshu" to "com.xingin.xhs",
+        "rednote"     to "com.xingin.xhs",
+        "钉钉"        to "com.alibaba.android.rimet",
+        "dingtalk"    to "com.alibaba.android.rimet",
+        "飞书"        to "com.ss.android.lark",
+        "feishu"      to "com.ss.android.lark",
+        "lark"        to "com.ss.android.lark",
+        "企业微信"    to "com.tencent.wework",
+        "wecom"       to "com.tencent.wework",
+
+        // 短视频
+        "抖音"        to "com.ss.android.ugc.aweme",
+        "douyin"      to "com.ss.android.ugc.aweme",
+        "快手"        to "com.smile.gifmaker",
+        "kuaishou"    to "com.smile.gifmaker",
+
+        // 视频
+        "b站"         to "tv.danmaku.bili",
+        "bilibili"    to "tv.danmaku.bili",
+        "哔哩哔哩"    to "tv.danmaku.bili",
+        "爱奇艺"      to "com.qiyi.video",
+        "iqiyi"       to "com.qiyi.video",
+        "优酷"        to "com.youku.phone",
+        "youku"       to "com.youku.phone",
+        "腾讯视频"    to "com.tencent.qqlive",
+
+        // 音乐
+        "网易云音乐"  to "com.netease.cloudmusic",
+        "netease music" to "com.netease.cloudmusic",
+        "qq音乐"      to "com.tencent.qqmusic",
+        "qq music"    to "com.tencent.qqmusic",
+
+        // 购物
+        "淘宝"        to "com.taobao.taobao",
+        "taobao"      to "com.taobao.taobao",
+        "京东"        to "com.jingdong.app.mall",
+        "jd"          to "com.jingdong.app.mall",
+        "拼多多"      to "com.xunmeng.pinduoduo",
+        "pinduoduo"   to "com.xunmeng.pinduoduo",
+        "美团"        to "com.sankuai.meituan",
+        "meituan"     to "com.sankuai.meituan",
+        "饿了么"      to "me.ele",
+        "eleme"       to "me.ele",
+
+        // 支付 / 金融
+        "支付宝"      to "com.eg.android.AlipayGphone",
+        "alipay"      to "com.eg.android.AlipayGphone",
+
+        // 出行
+        "滴滴"        to "com.sdu.didi.psnger",
+        "didi"        to "com.sdu.didi.psnger",
+        "高德地图"    to "com.autonavi.minimap",
+        "高德"        to "com.autonavi.minimap",
+        "amap"        to "com.autonavi.minimap",
+        "百度地图"    to "com.baidu.BaiduMap",
+
+        // 搜索 / 浏览器
+        "百度"        to "com.baidu.searchbox",
+        "baidu"       to "com.baidu.searchbox",
+        "夸克"        to "com.quark.browser",
+        "quark"       to "com.quark.browser",
+        "uc浏览器"    to "com.UCMobile",
+        "uc"          to "com.UCMobile",
+
+        // 办公 / 邮箱
+        "wps"         to "cn.wps.moffice_eng",
+        "网易邮箱"    to "com.netease.mail",
+        "163邮箱"     to "com.netease.mail",
+        "qq邮箱"      to "com.tencent.androidqqmail",
+        "outlook"     to "com.microsoft.office.outlook",
+
+        // ── 社交 / 交友 ──
+        "soul"        to "cn.soulapp.android",
+        "陌陌"        to "com.immomo.momo",
+        "momo"        to "com.immomo.momo",
+        "探探"        to "com.p1.mobile.putong",
+        "tantan"      to "com.p1.mobile.putong",
+        "连信"        to "com.lianxin.main",
+        "lianxin"     to "com.lianxin.main",
+        "青藤之恋"    to "com.qingteng.love",
+        "uki"         to "com.wemomo.uki",
     )
 
     // ── Torch state ──────────────────────────────────────────────────────────

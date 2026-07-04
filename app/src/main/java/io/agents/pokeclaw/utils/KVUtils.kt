@@ -150,7 +150,7 @@ object KVUtils {
 
     // ==================== Telegram Bot Config ====================
     fun getTelegramBotToken(): String = getString(KEY_TELEGRAM_BOT_TOKEN, "")
-    fun setTelegramBotToken(value: String) = putString(KEY_TELEGRAM_BOT_TOKEN, value)
+    fun setTelegramBotToken(value: String) { putString(KEY_TELEGRAM_BOT_TOKEN, value); backupSettings() }
 
     // ==================== WeChat iLink Bot Config ====================
     fun getWechatBotToken(): String = getString(KEY_WECHAT_BOT_TOKEN, "")
@@ -286,7 +286,7 @@ object KVUtils {
     private const val KEY_PENDING_LOCAL_GPU_INIT_PID = "KEY_PENDING_LOCAL_GPU_INIT_PID"
 
     fun getLlmApiKey(): String = getString(KEY_LLM_API_KEY, "")
-    fun setLlmApiKey(value: String) = putString(KEY_LLM_API_KEY, value)
+    fun setLlmApiKey(value: String) { putString(KEY_LLM_API_KEY, value); backupSettings() }
 
     /** Per-provider API key storage — allows users to save keys for multiple providers simultaneously. */
     fun getApiKeyForProvider(provider: String): String =
@@ -294,13 +294,13 @@ object KVUtils {
     fun setApiKeyForProvider(provider: String, key: String) =
         putString("KEY_LLM_API_KEY_${provider.uppercase()}", key)
     fun getLlmBaseUrl(): String = getString(KEY_LLM_BASE_URL, "")
-    fun setLlmBaseUrl(value: String) = putString(KEY_LLM_BASE_URL, value)
+    fun setLlmBaseUrl(value: String) { putString(KEY_LLM_BASE_URL, value); backupSettings() }
     fun getLlmModelName(): String = getString(KEY_LLM_MODEL_NAME, "")
     fun setLlmModelName(value: String) = putString(KEY_LLM_MODEL_NAME, value)
     fun getLlmProvider(): String = getString(KEY_LLM_PROVIDER, "OPENAI")
     fun setLlmProvider(value: String) = putString(KEY_LLM_PROVIDER, value)
     fun getLocalModelPath(): String = getString(KEY_LOCAL_MODEL_PATH, "")
-    fun setLocalModelPath(value: String) = putString(KEY_LOCAL_MODEL_PATH, value)
+    fun setLocalModelPath(value: String) { putString(KEY_LOCAL_MODEL_PATH, value); backupSettings() }
     fun getLocalBackendPreference(): String = getString(KEY_LOCAL_BACKEND_PREFERENCE, "")
     fun setLocalBackendPreference(value: String) = putString(KEY_LOCAL_BACKEND_PREFERENCE, value)
     fun getLocalCpuSafeDevice(): String = getString(KEY_LOCAL_CPU_SAFE_DEVICE, "")
@@ -345,11 +345,11 @@ object KVUtils {
     private const val KEY_DEFAULT_CLOUD_BASE_URL = "KEY_DEFAULT_CLOUD_BASE_URL"
 
     fun getDefaultCloudModel(): String = getString(KEY_DEFAULT_CLOUD_MODEL, "")
-    fun setDefaultCloudModel(value: String) = putString(KEY_DEFAULT_CLOUD_MODEL, value)
+    fun setDefaultCloudModel(value: String) { putString(KEY_DEFAULT_CLOUD_MODEL, value); backupSettings() }
     fun getDefaultCloudProvider(): String = getString(KEY_DEFAULT_CLOUD_PROVIDER, "")
-    fun setDefaultCloudProvider(value: String) = putString(KEY_DEFAULT_CLOUD_PROVIDER, value)
+    fun setDefaultCloudProvider(value: String) { putString(KEY_DEFAULT_CLOUD_PROVIDER, value); backupSettings() }
     fun getDefaultCloudBaseUrl(): String = getString(KEY_DEFAULT_CLOUD_BASE_URL, "")
-    fun setDefaultCloudBaseUrl(value: String) = putString(KEY_DEFAULT_CLOUD_BASE_URL, value)
+    fun setDefaultCloudBaseUrl(value: String) { putString(KEY_DEFAULT_CLOUD_BASE_URL, value); backupSettings() }
 
     /** Returns true if a local default model is configured and the file exists. */
     fun hasDefaultLocalModel(): Boolean {
@@ -387,6 +387,52 @@ object KVUtils {
     private const val KEY_CUSTOM_LOCAL_MODEL_URL = "KEY_CUSTOM_LOCAL_MODEL_URL"
 
     fun getCustomLocalModelUrl(): String = getString(KEY_CUSTOM_LOCAL_MODEL_URL, "")
-    fun setCustomLocalModelUrl(value: String) = putString(KEY_CUSTOM_LOCAL_MODEL_URL, value)
+    fun setCustomLocalModelUrl(value: String) { putString(KEY_CUSTOM_LOCAL_MODEL_URL, value); backupSettings() }
     fun hasCustomLocalModelUrl(): Boolean = getCustomLocalModelUrl().isNotBlank()
+
+    // ==================== Settings Backup / Restore ====================
+    private fun getBackupFile(): java.io.File {
+        val dir = java.io.File(android.os.Environment.getExternalStorageDirectory(), "PokeClaw")
+        if (!dir.exists()) dir.mkdirs()
+        return java.io.File(dir, "settings_backup.json")
+    }
+
+    fun backupSettings() {
+        try {
+            val json = org.json.JSONObject()
+            for (key in getAllKeys()) {
+                val strVal = getString(key, "")
+                if (strVal.isNotEmpty()) json.put(key, strVal)
+            }
+            json.put("_backup_version", 1)
+            json.put("_backup_time", System.currentTimeMillis())
+            getBackupFile().writeText(json.toString(), Charsets.UTF_8)
+            XLog.i("KVUtils", "Settings backed up")
+        } catch (e: Exception) {
+            XLog.w("KVUtils", "Backup failed: ${e.message}")
+        }
+    }
+
+    fun restoreSettingsIfNeeded() {
+        if (getAllKeys().isNotEmpty()) return
+        val file = getBackupFile()
+        if (!file.exists()) return
+        try {
+            val json = org.json.JSONObject(file.readText(Charsets.UTF_8))
+            var restored = 0
+            val keys = json.keys()
+            while (keys.hasNext()) {
+                val key = keys.next()
+                if (key.startsWith("_backup_")) continue
+                val value = json.optString(key, "")
+                if (value.isNotEmpty()) { putString(key, value); restored++ }
+            }
+            sync()
+            XLog.i("KVUtils", "Settings restored: $restored keys")
+        } catch (e: Exception) {
+            XLog.w("KVUtils", "Restore failed: ${e.message}")
+        }
+    }
+
+    fun hasBackup(): Boolean = getBackupFile().exists()
 }

@@ -124,14 +124,14 @@ class SettingsActivity : BaseActivity() {
         permAccessibility?.setTrailingText(capabilities.accessibilityStatusLabel)
         permNotification?.setTrailingText(capabilities.notificationPermissionStatusLabel)
         permNotifAccess?.setTrailingText(capabilities.notificationAccessStatusLabel)
-        permOverlay?.setTrailingText(if (capabilities.overlayGranted) "Enabled" else "Disabled")
-        permBattery?.setTrailingText(if (capabilities.batteryOptimizationIgnored) "Unrestricted" else "Restricted")
-        permStorage?.setTrailingText(if (capabilities.storageAccessGranted) "Enabled" else "Disabled")
+        permOverlay?.setTrailingText(if (capabilities.overlayGranted) getString(R.string.settings_enabled) else getString(R.string.settings_disabled))
+        permBattery?.setTrailingText(if (capabilities.batteryOptimizationIgnored) getString(R.string.settings_unrestricted) else getString(R.string.settings_restricted))
+        permStorage?.setTrailingText(if (capabilities.storageAccessGranted) getString(R.string.settings_enabled) else getString(R.string.settings_disabled))
     }
 
     private fun refreshExternalAutomation() {
         externalAutomationItem?.setTrailingText(
-            if (KVUtils.isExternalAutomationEnabled()) "Enabled" else "Disabled"
+            if (KVUtils.isExternalAutomationEnabled()) getString(R.string.settings_enabled) else getString(R.string.settings_disabled)
         )
     }
 
@@ -198,20 +198,20 @@ class SettingsActivity : BaseActivity() {
         if (KVUtils.isExternalAutomationEnabled()) {
             KVUtils.setExternalAutomationEnabled(false)
             refreshExternalAutomation()
-            Toast.makeText(this, "External Automation disabled", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_ext_auto_disabled), Toast.LENGTH_SHORT).show()
             return
         }
 
         ConfirmDialog.showWarm(
             context = this,
-            title = "Enable External Automation?",
-            message = "This lets trusted apps like Tasker, MacroDroid, or ADB start PokeClaw tasks with explicit Android intents. Keep it off unless you control the automation that will call it.",
-            actionTitle = "Enable",
+            title = getString(R.string.settings_enable_ext_auto_title),
+            message = getString(R.string.settings_enable_ext_auto_message),
+            actionTitle = getString(R.string.settings_enable_ext_auto_action),
             cancelTitle = getString(R.string.common_cancel),
             onAction = {
                 KVUtils.setExternalAutomationEnabled(true)
                 refreshExternalAutomation()
-                Toast.makeText(this, "External Automation enabled", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_ext_auto_enabled), Toast.LENGTH_SHORT).show()
             }
         )
     }
@@ -219,7 +219,7 @@ class SettingsActivity : BaseActivity() {
     private fun initMenuGroups() {
         // Permissions
         val permissionsGroup = findViewById<MenuGroup>(R.id.permissionsGroup)
-        permissionsGroup.setTitle("Permissions")
+        permissionsGroup.setTitle(getString(R.string.settings_permissions))
 
         permAccessibility = permissionsGroup.addMenuItem(
             leadingIcon = R.drawable.ic_accessibility,
@@ -246,13 +246,13 @@ class SettingsActivity : BaseActivity() {
             showDivider = true
         ).apply {
             setTrailingText(
-                if (AppCapabilityCoordinator.isNotificationPermissionGranted(this@SettingsActivity)) "Enabled" else "Disabled"
+                if (AppCapabilityCoordinator.isNotificationPermissionGranted(this@SettingsActivity)) getString(R.string.settings_enabled) else getString(R.string.settings_disabled)
             )
         }
 
         permNotifAccess = permissionsGroup.addMenuItem(
             leadingIcon = R.drawable.ic_notification,
-            title = "Notification Access",
+            title = getString(R.string.settings_notification_access),
             onClick = {
                 AppCapabilityCoordinator.openSystemSettings(this, AppRequirement.NOTIFICATION_ACCESS)
             },
@@ -340,10 +340,10 @@ class SettingsActivity : BaseActivity() {
         )
         menuItems[SettingsViewModel.MenuAction.LLM_CONFIG.name]?.setLeadingIconColor(getColor(R.color.colorTextPrimary))
 
-        // Task Budget (inline in model group)
+        // 任务预算 (inline in model group)
         modelGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_recent_history,
-            title = "Task Budget",
+            title = getString(R.string.settings_task_budget),
             onClick = { showBudgetDialog() },
             showDivider = true
         ).apply {
@@ -426,11 +426,11 @@ class SettingsActivity : BaseActivity() {
 
         // Appearance
         val appearanceGroup = findViewById<MenuGroup>(R.id.appearanceGroup)
-        appearanceGroup.setTitle("Appearance")
+        appearanceGroup.setTitle(getString(R.string.settings_appearance))
 
         appearanceGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_slideshow,
-            title = "Theme",
+            title = getString(R.string.menu_theme),
             onClick = {
                 startActivity(Intent(this, ThemeActivity::class.java))
             },
@@ -443,42 +443,42 @@ class SettingsActivity : BaseActivity() {
 
         // Tools
         val toolsGroup = findViewById<MenuGroup>(R.id.toolsGroup)
-        toolsGroup.setTitle("Tools")
+        toolsGroup.setTitle(getString(R.string.settings_tools))
 
         toolsGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_manage,
-            title = "Manage Tools",
+            title = "管理工具",
             onClick = {
-                Toast.makeText(this, "12 tools enabled. Tool management coming soon.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "已启用 12 个工具，工具管理即将上线。", Toast.LENGTH_SHORT).show()
             },
             showDivider = false
         ).apply {
-            setTrailingText("12 enabled")
+            setTrailingText("已启用 12 个")
         }
 
         // Remote Control
         val remoteGroup = findViewById<MenuGroup>(R.id.remoteGroup)
-        remoteGroup.setTitle("Remote Control")
+        remoteGroup.setTitle(getString(R.string.settings_remote_control))
 
         remoteGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_send,
-            title = "Telegram Bot",
+            title = "Telegram 机器人",
             onClick = {
                 channelConfigLauncher.launch(ChannelConfigActivity.ChannelType.TELEGRAM)
             },
             showDivider = true
         ).apply {
             val token = KVUtils.getTelegramBotToken()
-            setTrailingText(if (token.isNotEmpty()) "Connected" else "Not connected")
+            setTrailingText(if (token.isNotEmpty()) getString(R.string.common_bound) else getString(R.string.common_unbound))
         }
 
         externalAutomationItem = remoteGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_share,
-            title = "External Automation",
+            title = getString(R.string.settings_external_automation),
             onClick = { toggleExternalAutomation() },
             showDivider = true
         ).apply {
-            setTrailingText(if (KVUtils.isExternalAutomationEnabled()) "Enabled" else "Disabled")
+            setTrailingText(if (KVUtils.isExternalAutomationEnabled()) getString(R.string.settings_enabled) else getString(R.string.settings_disabled))
         }
 
         remoteGroup.addMenuItem(
@@ -487,25 +487,25 @@ class SettingsActivity : BaseActivity() {
             onClick = { },
             showDivider = true
         ).apply {
-            setTrailingText("Coming soon")
+            setTrailingText(getString(R.string.settings_coming_soon))
         }
 
         remoteGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_myplaces,
-            title = "Web Dashboard",
+            title = getString(R.string.settings_web_dashboard),
             onClick = { },
             showDivider = false
         ).apply {
-            setTrailingText("Coming soon")
+            setTrailingText(getString(R.string.settings_coming_soon))
         }
 
         // About
         val aboutGroup = findViewById<MenuGroup>(R.id.aboutGroup)
-        aboutGroup.setTitle("About")
+        aboutGroup.setTitle(getString(R.string.settings_about))
 
         aboutGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_info_details,
-            title = "PokeClaw",
+            title = "PokeClaw（应用）",
             onClick = { },
             showDivider = true
         ).apply {
@@ -514,69 +514,69 @@ class SettingsActivity : BaseActivity() {
 
         aboutGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_send,
-            title = "Report a Bug",
+            title = getString(R.string.settings_report_bug),
             onClick = { reportBug() },
             showDivider = true
         ).apply {
-            setTrailingText("GitHub + ZIP")
+            setTrailingText(getString(R.string.settings_github_zip))
         }
 
         aboutGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_upload,
-            title = "Share Debug Report",
+            title = getString(R.string.settings_share_debug),
             onClick = { shareDebugReport() },
             showDivider = true
         ).apply {
-            setTrailingText("ZIP logs + state")
+            setTrailingText(getString(R.string.settings_zip_logs))
         }
 
         aboutGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_share,
-            title = "GitHub",
+            title = "GitHub 代码托管",
             onClick = {
-                startActivity(Intent(Intent.ACTION_VIEW, "https://github.com/agents-io/PokeClaw".toUri()))
+                startActivity(Intent(Intent.ACTION_VIEW, "https://github.com/jacxzhang/ROWENxAI".toUri()))
             },
             showDivider = true
         ).apply {
-            setTrailingText("agents-io/PokeClaw")
+            setTrailingText("jacxzhang/ROWENxAI")
         }
 
         aboutGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_compass,
-            title = "Built by",
+            title = getString(R.string.settings_author),
             onClick = {
-                startActivity(Intent(Intent.ACTION_VIEW, "https://github.com/ithiria894".toUri()))
+                startActivity(Intent(Intent.ACTION_VIEW, "https://mp.weixin.qq.com".toUri()))  // TODO: 替换为你的公众号链接
             },
             showDivider = false
         ).apply {
-            setTrailingText("ithiria894")
+            setTrailingText("罗恩xAI")
         }
     }
 
     private fun reportBug() {
         buildSupportBundle(
-            preparingToast = "Preparing bug report…"
+            preparingToast = "正在准备问题报告…"
         ) { report ->
             AlertDialog.show(
                 context = this@SettingsActivity,
-                title = "Bug report ready",
+                title = "问题报告已就绪",
                 message = """
                     ${report.name} is ready.
 
-                    Open GitHub Issue to file the bug now.
-                    If your browser or GitHub app makes attachment upload awkward, tap Share ZIP instead and send the report manually.
+                    打开 GitHub Issue to file the bug now.
+                    If your browser or GitHub app makes attachment upload awkward, tap 分享 ZIP instead and send the report manually.
                 """.trimIndent(),
-                actionTitle = "Open GitHub Issue",
-                cancelTitle = "Share ZIP",
+                actionTitle = "打开 GitHub 问题",
+                cancelTitle = "分享 ZIP",
                 onAction = { openGitHubIssue(report) },
                 onCancel = {
                     shareReportFile(
                         report = report,
-                        chooserTitle = "Share bug report ZIP",
-                        subject = "PokeClaw bug report ${io.agents.pokeclaw.BuildConfig.VERSION_NAME}",
+                        chooserTitle = "分享问题报告 ZIP",
+                        subject = "PokeClaw 问题报告 ${io.agents.pokeclaw.BuildConfig.VERSION_NAME}",
                         body = """
                             Attach this ZIP to your GitHub issue:
-                            https://github.com/agents-io/PokeClaw/issues/new
+                            https://github.com/jacxzhang/ROWENxAI/issues/new
                         """.trimIndent()
                     )
                 }
@@ -586,13 +586,13 @@ class SettingsActivity : BaseActivity() {
 
     private fun shareDebugReport() {
         buildSupportBundle(
-            preparingToast = "Preparing debug report…",
+            preparingToast = "正在准备调试报告…",
         ) { report ->
             shareReportFile(
                 report = report,
-                chooserTitle = "Share debug report",
-                subject = "PokeClaw debug report ${io.agents.pokeclaw.BuildConfig.VERSION_NAME}",
-                body = "Attach this debug report when reporting a PokeClaw issue."
+                chooserTitle = "分享调试报告",
+                subject = "PokeClaw 调试报告 ${io.agents.pokeclaw.BuildConfig.VERSION_NAME}",
+                body = "报告 PokeClaw 问题时请附上此调试报告。"
             )
         }
     }
@@ -610,18 +610,18 @@ class SettingsActivity : BaseActivity() {
             }.onSuccess { report ->
                 onReportReady(report)
             }.onFailure { error ->
-                XLog.e("SettingsActivity", "Failed to build debug report", error)
-                Toast.makeText(this@SettingsActivity, "Failed to build debug report", Toast.LENGTH_LONG).show()
+                XLog.e("SettingsActivity", "构建调试报告失败", error)
+                Toast.makeText(this@SettingsActivity, "构建调试报告失败", Toast.LENGTH_LONG).show()
             }
         }
     }
 
     private fun openGitHubIssue(report: java.io.File) {
-        val issueUri = "https://github.com/agents-io/PokeClaw/issues/new".toUri()
+        val issueUri = "https://github.com/jacxzhang/ROWENxAI/issues/new".toUri()
             .buildUpon()
             .appendQueryParameter(
                 "title",
-                "[Bug] ${Build.MANUFACTURER} ${Build.MODEL} - "
+                "[问题] ${Build.MANUFACTURER} ${Build.MODEL} - "
             )
             .appendQueryParameter("body", buildGitHubIssueBody(report))
             .build()
@@ -629,11 +629,11 @@ class SettingsActivity : BaseActivity() {
             startActivity(Intent(Intent.ACTION_VIEW, issueUri))
             Toast.makeText(
                 this,
-                "Attach ${report.name} to the GitHub issue after the page opens",
+                "页面打开后，将 ${report.name} 附加到 GitHub 问题",
                 Toast.LENGTH_LONG
             ).show()
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, "No app available to open GitHub", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "没有可打开 GitHub 的应用", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -684,7 +684,7 @@ class SettingsActivity : BaseActivity() {
         try {
             startActivity(Intent.createChooser(intent, chooserTitle))
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this@SettingsActivity, "No app available to share the report", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@SettingsActivity, "没有可分享报告的应用", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -792,12 +792,12 @@ class SettingsActivity : BaseActivity() {
         }
 
         val tokenLabel = android.widget.TextView(this).apply {
-            text = "Max tokens per task"
+            text = "每任务最大 token 数"
             setTextColor(getColor(R.color.colorTextPrimary))
         }
         layout.addView(tokenLabel)
 
-        val tokenOptions = arrayOf("Unlimited", "10K", "50K", "100K", "200K", "250K", "500K")
+        val tokenOptions = arrayOf("不限", "10K", "50K", "100K", "200K", "250K", "500K")
         val tokenValues = arrayOf<Int?>(null, 10_000, 50_000, 100_000, 200_000, 250_000, 500_000)
         val selectedTokenIndex = when (currentTokens) {
             null -> 0
@@ -815,23 +815,23 @@ class SettingsActivity : BaseActivity() {
         layout.addView(tokenSpinner)
 
         val costLabel = android.widget.TextView(this).apply {
-            text = "\nMax cost per task (USD)"
+            text = "\n每任务最高费用（USD）"
             setTextColor(getColor(R.color.colorTextPrimary))
         }
         layout.addView(costLabel)
 
         val costInput = android.widget.EditText(this).apply {
             inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
-            hint = "Blank = no cost cap"
+            hint = "留空=不设费用上限"
             setText(currentCost?.let { String.format("%.2f", it) } ?: "")
             setTextColor(getColor(R.color.colorTextPrimary))
         }
         layout.addView(costInput)
 
         android.app.AlertDialog.Builder(this)
-            .setTitle("Task Budget")
+            .setTitle("任务预算")
             .setView(layout)
-            .setPositiveButton("Save") { _, _ ->
+            .setPositiveButton(getString(R.string.llm_save)) { _, _ ->
                 val newTokens = tokenValues[tokenSpinner.selectedItemPosition]
                 val newCost = costInput.text.toString().trim().toDoubleOrNull()
 
@@ -845,10 +845,10 @@ class SettingsActivity : BaseActivity() {
                 }
 
                 val summary = io.agents.pokeclaw.agent.TaskBudget.describeCurrentBudget()
-                Toast.makeText(this, "Budget: $summary", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "预算: $summary", Toast.LENGTH_SHORT).show()
                 recreate()
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(getString(R.string.dialog_cancel), null)
             .show()
     }
 }

@@ -7,15 +7,15 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/agents-io/PokeClaw/stargazers"><img src="https://img.shields.io/github/stars/agents-io/PokeClaw?style=social" alt="Stars" /></a>
-  <a href="https://github.com/agents-io/PokeClaw/network/members"><img src="https://img.shields.io/github/forks/agents-io/PokeClaw?style=social" alt="Forks" /></a>
-  <a href="https://github.com/agents-io/PokeClaw/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed/agents-io/PokeClaw?style=social" alt="Closed Issues" /></a>
+  <a href="https://github.com/jacxzhang/ROWENxAI/stargazers"><img src="https://img.shields.io/github/stars/jacxzhang/ROWENxAI?style=social" alt="Stars" /></a>
+  <a href="https://github.com/jacxzhang/ROWENxAI/network/members"><img src="https://img.shields.io/github/forks/jacxzhang/ROWENxAI?style=social" alt="Forks" /></a>
+  <a href="https://github.com/jacxzhang/ROWENxAI/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed/jacxzhang/ROWENxAI?style=social" alt="Closed Issues" /></a>
   <img src="https://img.shields.io/badge/Android-9%2B-3DDC84?logo=android&logoColor=white" alt="Android 9+" />
-  <a href="https://github.com/agents-io/PokeClaw/releases/latest"><img src="https://img.shields.io/github/v/release/agents-io/PokeClaw" alt="Latest Release" /></a>
+  <a href="https://github.com/jacxzhang/ROWENxAI/releases/latest"><img src="https://img.shields.io/github/v/release/jacxzhang/ROWENxAI" alt="Latest Release" /></a>
 </p>
 
 <p align="center">
-  🌐 <a href="https://agents-io.github.io/PokeClaw/">Landing Page</a> — available in English · हिन्दी · 日本語 · Deutsch · 繁中
+  🌐 <a href="https://jacxzhang.github.io/PokeClaw/">Landing Page</a> — available in English · हिन्दी · 日本語 · Deutsch · 繁中
 </p>
 
 # PokeClaw (PocketClaw) — On-Device AI Phone Agent
@@ -80,7 +80,7 @@ The interesting part is not just chatting with a local model. The interesting pa
 
 PokeClaw already supports fully on-device automation with Gemma 4 and optional cloud models for stronger task execution. The current focus is broader device support, more generic skills, more local model options, and a cleaner public release path.
 
-**If you hit something interesting, [open an issue](https://github.com/agents-io/PokeClaw/issues).** Real device reports are how this gets better fast.
+**If you hit something interesting, [open an issue](https://github.com/jacxzhang/ROWENxAI/issues).** Real device reports are how this gets better fast.
 
 ## Product Direction
 
@@ -141,7 +141,7 @@ External automation tools are still useful. Tasker, MacroDroid, Locale, and simi
 
 ## See the UI
 
-👉 **[Try the interactive demo on our landing page](https://agents-io.github.io/PokeClaw/)** — click through every screen without installing anything.
+👉 **[Try the interactive demo on our landing page](https://jacxzhang.github.io/PokeClaw/)** — click through every screen without installing anything.
 
 ## What it does
 
@@ -258,7 +258,7 @@ As on-device models get smarter, more of this can become free-form. Right now, s
 
 ## Download
 
-[**Download APK**](https://github.com/agents-io/PokeClaw/releases/latest)
+[**Download APK**](https://github.com/jacxzhang/ROWENxAI/releases/latest)
 
 > Note: If you are updating from an older public debug build and Android says the package is incompatible, uninstall the old build once and then install the latest APK fresh. Older public debug builds still receive the in-app update prompt, but they need a one-time reinstall before joining the stable-signed `0.6.x` line.
 
@@ -412,9 +412,9 @@ If you want something added, please open an issue. The roadmap above is intentio
 
 PokeClaw is moving fast, and the roadmap is being shaped directly by real device reports, feature requests, and QA results. If you want to help push local phone agents forward:
 
-- ⭐ **[Star this repo](https://github.com/agents-io/PokeClaw)** if you think local AI phone control matters
-- 🐛 **[Open an issue](https://github.com/agents-io/PokeClaw/issues)** when you hit a bug or want a feature
-- 🍴 **[Fork it](https://github.com/agents-io/PokeClaw/fork)** and build on it
+- ⭐ **[Star this repo](https://github.com/jacxzhang/ROWENxAI)** if you think local AI phone control matters
+- 🐛 **[Open an issue](https://github.com/jacxzhang/ROWENxAI/issues)** when you hit a bug or want a feature
+- 🍴 **[Fork it](https://github.com/jacxzhang/ROWENxAI/fork)** and build on it
 
 Every star helps more people find the project. Every issue helps shape the next release.
 

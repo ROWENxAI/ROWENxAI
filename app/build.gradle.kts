@@ -57,7 +57,7 @@ android {
         versionCode = readLocalOrEnvInt("POKECLAW_VERSION_CODE", 29)
         versionName = readLocalOrEnvString("POKECLAW_VERSION_NAME", "0.7.1")
         buildConfigField("String", "VERSION_INFO", getVersionGit())
-        buildConfigField("String", "APP_ORIGIN", "\"PokeClaw by agents.io | github.com/agents-io/PokeClaw\"")
+        buildConfigField("String", "APP_ORIGIN", "\"ROWENxAI by jacxzhang | github.com/jacxzhang/ROWENxAI\"")
         buildConfigField("String", "BUILD_FINGERPRINT", "\"${getBuildFingerprint()}\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
