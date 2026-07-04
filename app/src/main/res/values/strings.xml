@@ -1,4 +1,4 @@
-﻿<resources>
+<resources>
     <string name="app_name">PokeClaw</string>
 
     <!-- Common -->
@@ -70,7 +70,7 @@
 
     <!-- Channel Config -->
     <string name="channel_config_discord_title">Discord Config</string>
-    <string name="channel_config_discord_tip">Enter Bot Token (from Discord Developer Portal 鈫?Bot page). Message Content Intent must be enabled.</string>
+    <string name="channel_config_discord_tip">Enter Bot Token (from Discord Developer Portal → Bot page). Message Content Intent must be enabled.</string>
     <string name="channel_config_discord_hint1">Enter Bot Token</string>
     <string name="channel_config_telegram_title">Telegram Config</string>
     <string name="channel_config_telegram_tip">Enter Bot Token (create a bot via @BotFather on Telegram to get the token)</string>
@@ -78,7 +78,7 @@
     <string name="channel_config_wechat_title">WeChat Config</string>
     <string name="channel_config_wechat_tip">Scan QR code with WeChat to authorize the bot. Token and API URL will be saved automatically after confirmation.</string>
     <string name="channel_config_wechat_btn_scan">Get QR Code</string>
-    <string name="channel_config_wechat_scanning">Waiting for scan鈥?/string>
+    <string name="channel_config_wechat_scanning">Waiting for scan…</string>
     <string name="channel_config_wechat_confirmed">Authorization confirmed</string>
     <string name="wechat_qr_failed">Failed to get WeChat QR code</string>
     <string name="wechat_unsupported_media">Received %s message, this type is not supported yet. Please send a text command.</string>
@@ -88,8 +88,8 @@
     <string name="wechat_media_voice">voice</string>
     <string name="wechat_media_unknown">media</string>
     <string name="channel_config_saved">Configuration saved</string>
-    <string name="channel_config_lan_hint">馃挕 Enable \"LAN Config\" in Settings to configure via browser</string>
-    <string name="channel_config_lan_hint_running">馃挕 Open %s in your browser to configure</string>
+    <string name="channel_config_lan_hint">💡 Enable \"LAN Config\" in Settings to configure via browser</string>
+    <string name="channel_config_lan_hint_running">💡 Open %s in your browser to configure</string>
     <string name="channel_config_lan_copied">Address copied</string>
 
     <!-- LLM Config -->
@@ -126,7 +126,7 @@
     <!-- Foreground Service Notification -->
     <string name="notification_channel_name">PokeClaw Status</string>
     <string name="notification_channel_description">Shows PokeClaw running status and stats</string>
-    <string name="notification_content_title">PokeClaw 路 Task in progress</string>
+    <string name="notification_content_title">PokeClaw · Task in progress</string>
     <string name="notification_content_text">Running task...</string>
 
     <!-- Channel Messages -->
@@ -150,7 +150,7 @@
     <string name="cd_task_error">Task failed</string>
     <string name="cd_channel_logo">Channel logo</string>
     <string name="cd_app_logo">App logo</string>
-    <string name="cd_floating_idle">PokeClaw 鈥?tap to focus</string>
+    <string name="cd_floating_idle">PokeClaw — tap to focus</string>
     <string name="cd_qr_code">QR code</string>
     <string name="cd_toggle_password">Show or hide password</string>
     <string name="cd_copy">Copy</string>
@@ -209,7 +209,7 @@
 
     <!-- Voice Input (#44) -->
     <string name="voice_input_button_cd">Voice input</string>
-    <string name="voice_input_prompt">Speak now鈥?/string>
+    <string name="voice_input_prompt">Speak now…</string>
     <string name="voice_input_unavailable">Speech recognition not available on this device</string>
     <string name="voice_input_error">Voice input failed. Try again.</string>
 
@@ -223,7 +223,7 @@
     <!-- Custom Local Model URL (#36) -->
     <string name="custom_local_model_url_title">Custom local model URL</string>
     <string name="custom_local_model_url_dialog_title">Custom model download URL</string>
-    <string name="custom_local_model_url_hint">https://鈥?direct .litertlm download URL. Advanced: file size validation is relaxed for custom models.</string>
+    <string name="custom_local_model_url_hint">https://… direct .litertlm download URL. Advanced: file size validation is relaxed for custom models.</string>
     <string name="custom_local_model_url_not_set">Not set</string>
     <string name="custom_local_model_url_set">Custom URL set</string>
     <string name="custom_local_model_url_invalid">URL must start with http:// or https://</string>
@@ -251,11 +251,11 @@
     <string name="llm_no_default_cloud">No default cloud model</string>
     <string name="llm_use">Use</string>
     <string name="llm_needs_ram">Needs %1$dGB+</string>
-    <string name="llm_downloading">Downloading鈥?/string>
-    <string name="llm_testing">Testing鈥?/string>
-    <string name="llm_hint_api_key">sk-鈥?/string>
-    <string name="llm_download">鈫?Download</string>
-    <string name="llm_ready_to_save">鉁?Ready to save</string>
+    <string name="llm_downloading">Downloading…</string>
+    <string name="llm_testing">Testing…</string>
+    <string name="llm_hint_api_key">sk-…</string>
+    <string name="llm_download">→ Download</string>
+    <string name="llm_ready_to_save">✓ Ready to save</string>
     <string name="llm_save">Save</string>
     <string name="theme_dark">Dark Themes</string>
     <string name="theme_light">Light Themes</string>
@@ -280,9 +280,9 @@
     <string name="toast_image_upload_soon">Image upload coming soon</string>
     <string name="toast_deleted_model">Deleted %s</string>
     <string name="chat_no_api_key">No API key configured</string>
-    <string name="chat_configure_api_key">Configure API key鈥?/string>
+    <string name="chat_configure_api_key">Configure API key…</string>
     <string name="chat_no_local_model">No local model downloaded</string>
-    <string name="chat_download_models">Download models鈥?/string>
+    <string name="chat_download_models">Download models…</string>
     <string name="chat_rename">Rename</string>
     <string name="chat_delete">Delete</string>
     <string name="chat_delete_conversation">Delete conversation?</string>
@@ -327,7 +327,7 @@
     <string name="task_another_running">Another task is still running. Stop it first.</string>
     <string name="task_local_monitor_hint">Local mode starts monitoring from the Background card.</string>
     <string name="task_accessibility_required">Accessibility Service is required for this task.</string>
-    <string name="task_accessibility_connecting">Accessibility service connecting, please wait鈥?/string>
+    <string name="task_accessibility_connecting">Accessibility service connecting, please wait…</string>
     <string name="task_accessibility_toggle_hint">Accessibility service did not connect. Go to Settings and toggle it off then on.</string>
     <string name="cd_menu">Menu</string>
     <string name="quick_stop">Stop</string>
@@ -387,7 +387,7 @@
     <string name="llm_quick_deepseek">DeepSeek\n(Cheap)</string>
     <string name="llm_quick_qwen">Qwen\n(Aliyun)</string>
     <string name="llm_quick_moonshot">Moonshot\n(Kimi)</string>
-    <string name="llm_quick_hint">Tap a provider 鈫?register (free) 鈫?paste your API key below 鈫?save. No VPN needed for domestic providers.</string>
+    <string name="llm_quick_hint">Tap a provider → register (free) → paste your API key below → save. No VPN needed for domestic providers.</string>
     <string name="llm_quick_api_key_hint">Paste %1$s API key here</string>
     <string name="llm_quick_toast">%1$s selected. Register, copy your API key, paste it below, then save.</string>
 
@@ -396,18 +396,5 @@
     <string name="settings_feishu_dialog_title">Feishu Bot Token</string>
     <string name="settings_feishu_hint">Enter your Feishu Bot Webhook URL or Token</string>
     <string name="settings_feishu_bound">Feishu Bot configured</string>
-    <string name="settings_author">Author</string>
-    <string name="menu_theme">Theme</string>
-    <string name="dialog_cancel">Cancel</string>
-    
-    <!-- Quick setup for free models -->
-    <string name="llm_quick_setup">Quick Setup Free Models</string>
-    <string name="llm_quick_setup_desc">One-click configure free cloud models (requires registration for API Key)</string>
-    <string name="llm_quick_zhipu">Zhipu GLM-4 Flash\nFree</string>
-    <string name="llm_quick_deepseek">DeepSeek Chat\n¥0.27/M</string>
-    <string name="llm_quick_qwen">Qwen Turbo\n¥0.30/M</string>
-    <string name="llm_quick_kimi">Kimi Moonshot\n¥1.20/M</string>
-    <string name="llm_quick_selected">Selected %1$s - %2$s\nPlease register and get API Key</string>
-    <string name="llm_quick_no_browser">Cannot open browser</string>
-</resources>
 
+</resources>
