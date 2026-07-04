@@ -534,7 +534,7 @@ class SettingsActivity : BaseActivity() {
             leadingIcon = android.R.drawable.ic_menu_share,
             title = "GitHub 代码托管",
             onClick = {
-                startActivity(Intent(Intent.ACTION_VIEW, "https://github.com/jacxzhang/ROWENxAI".toUri()))
+                startActivity(Intent(Intent.ACTION_VIEW, "https://github.com/ROWENxAI/ROWENxAI".toUri()))
             },
             showDivider = true
         ).apply {
@@ -576,7 +576,7 @@ class SettingsActivity : BaseActivity() {
                         subject = "PokeClaw 问题报告 ${io.agents.pokeclaw.BuildConfig.VERSION_NAME}",
                         body = """
                             Attach this ZIP to your GitHub issue:
-                            https://github.com/jacxzhang/ROWENxAI/issues/new
+                            https://github.com/ROWENxAI/ROWENxAI/issues/new
                         """.trimIndent()
                     )
                 }
@@ -617,7 +617,7 @@ class SettingsActivity : BaseActivity() {
     }
 
     private fun openGitHubIssue(report: java.io.File) {
-        val issueUri = "https://github.com/jacxzhang/ROWENxAI/issues/new".toUri()
+        val issueUri = "https://github.com/ROWENxAI/ROWENxAI/issues/new".toUri()
             .buildUpon()
             .appendQueryParameter(
                 "title",
