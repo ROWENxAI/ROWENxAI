@@ -1,4 +1,4 @@
-// Copyright 2026 PokeClaw (agents.io). All rights reserved.
+﻿// Copyright 2026 PokeClaw (agents.io). All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
 package io.agents.pokeclaw.agent
@@ -19,10 +19,10 @@ data class CloudModel(
 )
 
 enum class ModelTier(val stars: String, val label: String) {
-    LITE("\u2606", "Lite"),       // ☆
-    FAST("\u2605", "Fast"),       // ★
-    SMART("\u2605\u2605", "Smart"),     // ★★
-    PRO("\u2605\u2605\u2605", "Pro")    // ★★★
+    LITE("\u2606", "Lite"),       // 鈽?
+    FAST("\u2605", "Fast"),       // 鈽?
+    SMART("\u2605\u2605", "Smart"),     // 鈽呪槄
+    PRO("\u2605\u2605\u2605", "Pro")    // 鈽呪槄鈽?
 }
 
 enum class CloudProvider(
@@ -55,6 +55,42 @@ enum class CloudProvider(
         defaultBaseUrl = "https://generativelanguage.googleapis.com/v1beta",
         models = listOf(
             CloudModel("gemini-2.5-flash", "Gemini 2.5 Flash", 0.15, 0.60, ModelTier.FAST, 1_000_000, recommended = true),
+    DEEPSEEK(
+        displayName = "DeepSeek",
+        defaultBaseUrl = "https://api.deepseek.com/v1",
+        models = listOf(
+            CloudModel("deepseek-chat", "DeepSeek Chat", 0.27, 1.10, ModelTier.FAST, 32_000, recommended = true),
+            CloudModel("deepseek-reasoner", "DeepSeek Reasoner", 0.55, 2.19, ModelTier.PRO, 32_000),
+        )
+    ),
+    QWEN(
+        displayName = "通义千问",
+        defaultBaseUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        models = listOf(
+            CloudModel("qwen-turbo", "Qwen Turbo", 0.30, 0.60, ModelTier.FAST, 8_000, recommended = true),
+            CloudModel("qwen-plus", "Qwen Plus", 0.80, 2.00, ModelTier.SMART, 32_000),
+            CloudModel("qwen-max", "Qwen Max", 2.40, 9.60, ModelTier.PRO, 32_000),
+        )
+    ),
+    MOONSHOT(
+        displayName = "Kimi",
+        defaultBaseUrl = "https://api.moonshot.cn/v1",
+        models = listOf(
+            CloudModel("moonshot-v1-8k", "Moonshot V1 8K", 1.20, 1.20, ModelTier.FAST, 8_000, recommended = true),
+            CloudModel("moonshot-v1-32k", "Moonshot V1 32K", 2.40, 2.40, ModelTier.SMART, 32_000),
+            CloudModel("moonshot-v1-128k", "Moonshot V1 128K", 6.00, 6.00, ModelTier.PRO, 128_000),
+        )
+    ),
+    ZHIPU(
+        displayName = "智谱",
+        defaultBaseUrl = "https://open.bigmodel.cn/api/paas/v4",
+        models = listOf(
+            CloudModel("glm-4-flash", "GLM-4 Flash", 0.00, 0.00, ModelTier.FAST, 128_000, recommended = true),
+            CloudModel("glm-4", "GLM-4", 1.00, 1.00, ModelTier.SMART, 128_000),
+            CloudModel("glm-4-plus", "GLM-4 Plus", 5.00, 5.00, ModelTier.PRO, 128_000),
+        )
+    ),
+
             CloudModel("gemini-2.5-pro", "Gemini 2.5 Pro", 1.25, 10.00, ModelTier.PRO, 1_000_000),
         )
     ),
@@ -84,3 +120,4 @@ enum class CloudProvider(
         }
     }
 }
+

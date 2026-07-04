@@ -1,4 +1,4 @@
-// Copyright 2026 PokeClaw (agents.io). All rights reserved.
+﻿// Copyright 2026 PokeClaw (agents.io). All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
 package io.agents.pokeclaw.ui.settings
@@ -155,9 +155,7 @@ class ChannelConfigActivity : BaseActivity() {
         finish()
     }
 
-    enum class ChannelType {
-        DISCORD, TELEGRAM
-    }
+    enum class ChannelType { DISCORD, TELEGRAM, FEISHU }
 
     /**
      * Channel config result
@@ -223,3 +221,4 @@ class ChannelConfigActivity : BaseActivity() {
         }
     }
 }
+

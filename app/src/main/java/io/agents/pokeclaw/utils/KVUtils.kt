@@ -1,4 +1,4 @@
-// Copyright 2026 PokeClaw (agents.io). All rights reserved.
+﻿// Copyright 2026 PokeClaw (agents.io). All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
 package io.agents.pokeclaw.utils
@@ -152,6 +152,11 @@ object KVUtils {
     fun getTelegramBotToken(): String = getString(KEY_TELEGRAM_BOT_TOKEN, "")
     fun setTelegramBotToken(value: String) { putString(KEY_TELEGRAM_BOT_TOKEN, value); backupSettings() }
 
+    // Feishu Bot Token
+    private const val KEY_FEISHU_BOT_TOKEN = "feishu_bot_token"
+    fun getFeishuBotToken(): String = getString(KEY_FEISHU_BOT_TOKEN, "")
+    fun setFeishuBotToken(value: String) { putString(KEY_FEISHU_BOT_TOKEN, value); backupSettings() }
+
     // ==================== WeChat iLink Bot Config ====================
     fun getWechatBotToken(): String = getString(KEY_WECHAT_BOT_TOKEN, "")
     fun setWechatBotToken(value: String) = putString(KEY_WECHAT_BOT_TOKEN, value)
@@ -288,7 +293,7 @@ object KVUtils {
     fun getLlmApiKey(): String = getString(KEY_LLM_API_KEY, "")
     fun setLlmApiKey(value: String) { putString(KEY_LLM_API_KEY, value); backupSettings() }
 
-    /** Per-provider API key storage — allows users to save keys for multiple providers simultaneously. */
+    /** Per-provider API key storage 鈥?allows users to save keys for multiple providers simultaneously. */
     fun getApiKeyForProvider(provider: String): String =
         getString("KEY_LLM_API_KEY_${provider.uppercase()}", "")
     fun setApiKeyForProvider(provider: String, key: String) =
@@ -338,7 +343,7 @@ object KVUtils {
 
     // ==================== Independent Default Models ====================
     // Local and Cloud each have their own default model config.
-    // Switching tabs reads from these keys — they never overwrite each other.
+    // Switching tabs reads from these keys 鈥?they never overwrite each other.
 
     private const val KEY_DEFAULT_CLOUD_MODEL = "KEY_DEFAULT_CLOUD_MODEL"
     private const val KEY_DEFAULT_CLOUD_PROVIDER = "KEY_DEFAULT_CLOUD_PROVIDER"
