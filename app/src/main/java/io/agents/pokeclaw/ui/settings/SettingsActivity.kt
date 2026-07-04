@@ -217,10 +217,22 @@ class SettingsActivity : BaseActivity() {
     }
 
     private fun initMenuGroups() {
-        // 小米/红米手机提示
+        // 各品牌手机无障碍提示
         val xiaomiTipLayout = findViewById<android.widget.LinearLayout>(R.id.xiaomiTipLayout)
         val manufacturer = android.os.Build.MANUFACTURER.lowercase()
-        if (manufacturer.contains("xiaomi") || manufacturer.contains("redmi") || manufacturer.contains("poco")) {
+        val brand = android.os.Build.BRAND.lowercase()
+        val isSpecialBrand = manufacturer.contains("xiaomi") || manufacturer.contains("redmi") || 
+            manufacturer.contains("poco") || manufacturer.contains("huawei") || 
+            manufacturer.contains("honor") || manufacturer.contains("oppo") || 
+            manufacturer.contains("vivo") || manufacturer.contains("oneplus") ||
+            manufacturer.contains("realme") || manufacturer.contains("samsung") ||
+            manufacturer.contains("meizu") || manufacturer.contains("zte") ||
+            manufacturer.contains("iqoo") || brand.contains("xiaomi") || 
+            brand.contains("redmi") || brand.contains("poco") || brand.contains("huawei") || 
+            brand.contains("honor") || brand.contains("oppo") || brand.contains("vivo") || 
+            brand.contains("oneplus") || brand.contains("realme") || brand.contains("samsung") ||
+            brand.contains("meizu") || brand.contains("zte") || brand.contains("iqoo")
+        if (isSpecialBrand) {
             xiaomiTipLayout?.visibility = android.view.View.VISIBLE
         }
 

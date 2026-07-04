@@ -401,9 +401,9 @@
     <string name="dialog_cancel">Cancel</string>
     
 
-    <!-- Xiaomi/Redmi phone tip -->
-    <string name="xiaomi_tip_title">⚠️ Xiaomi/Redmi Users Must Read</string>
-    <string name="xiaomi_tip_desc">Accessibility service requires extra setup:</string>
-    <string name="xiaomi_tip_steps">1. Disable MIUI Optimization: Settings → Additional Settings → Developer Options → Disable MIUI Optimization\n\n2. Allow Background: Settings → Apps → PokeClaw → Battery Saver → No Restrictions\n\n3. Enable Auto-start: Settings → Apps → PokeClaw → Self-Management → Enable Auto-start\n\n4. Re-enable Accessibility: Settings → Additional Settings → Accessibility → PokeClaw</string>
+    <!-- Multi-brand accessibility tip -->
+    <string name="xiaomi_tip_title">⚠️ Accessibility Setup Required</string>
+    <string name="xiaomi_tip_desc">Your phone needs extra setup for automation features:</string>
+    <string name="xiaomi_tip_steps">【Xiaomi/Redmi/POCO】\n1. Disable MIUI Optimization: Settings → Additional Settings → Developer Options\n2. Battery: Settings → Apps → PokeClaw → Battery Saver → No Restrictions\n3. Auto-start: Settings → Apps → PokeClaw → Self-Management → Enable\n\n【Huawei/Honor】\n1. Battery: Settings → Battery → App Launch → PokeClaw → Manual → Enable All\n2. Background: Settings → Apps → PokeClaw → Battery → Background Activity → Allow\n\n【OPPO/OnePlus/realme】\n1. Auto-start: Settings → Apps → Auto-start Management → PokeClaw → Enable\n2. Battery: Settings → Battery → More Settings → Optimize Battery → PokeClaw → Don\'t Optimize\n\n【vivo/iQOO】\n1. Auto-start: Settings → Apps → Auto-start → PokeClaw → Enable\n2. Background: Settings → Battery → Background Management → PokeClaw → Allow\n\n【Samsung】\n1. Battery: Settings → Battery → Background Usage Limits → Never Sleeping Apps → Add PokeClaw\n2. Auto-run: Settings → Apps → PokeClaw → Battery → Allow Background Activity\n\nAfter setup, restart the app and re-enable accessibility service</string>
     <string name="xiaomi_tip_button">Open Accessibility Settings</string>
 </resources>

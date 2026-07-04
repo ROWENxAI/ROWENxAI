@@ -28,7 +28,7 @@ public class OkHttpClientBuilderAdapter implements HttpClientBuilder {
     private static final String TAG = "OkHttp";
 
     private Duration connectTimeout = Duration.ofSeconds(60);
-    private Duration readTimeout = Duration.ofSeconds(300);
+    private Duration readTimeout = Duration.ofSeconds(60);
 
     /**
      * Whether to write raw request/response data to a file (sandbox cache directory)

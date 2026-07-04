@@ -401,9 +401,9 @@
     <string name="dialog_cancel">取消</string>
     
 
-    <!-- 小米/红米手机提示 -->
-    <string name="xiaomi_tip_title">⚠️ 小米/红米手机用户必看</string>
-    <string name="xiaomi_tip_desc">无障碍服务需要额外设置才能正常运行：</string>
-    <string name="xiaomi_tip_steps">1. 关闭MIUI优化：设置 → 更多设置 → 开发者选项 → 关闭MIUI优化\n\n2. 允许后台运行：设置 → 应用 → PokeClaw → 省电策略 → 无限制\n\n3. 开启自启动：设置 → 应用 → PokeClaw → 自管理 → 开启自启动\n\n4. 重新开启无障碍：设置 → 更多设置 → 无障碍 → PokeClaw</string>
+    <!-- 各品牌手机无障碍提示 -->
+    <string name="xiaomi_tip_title">⚠️ 无障碍服务设置提醒</string>
+    <string name="xiaomi_tip_desc">您的手机需要额外设置才能正常使用自动化功能：</string>
+    <string name="xiaomi_tip_steps">【小米/红米/POCO】\n1. 关闭MIUI优化：设置 → 更多设置 → 开发者选项 → 关闭MIUI优化\n2. 省电策略：设置 → 应用 → PokeClaw → 省电策略 → 无限制\n3. 自启动：设置 → 应用 → PokeClaw → 自管理 → 开启自启动\n\n【华为/荣耀】\n1. 忽略电池优化：设置 → 电池 → 启动管理 → PokeClaw → 手动管理 → 全部开启\n2. 后台运行：设置 → 应用 → PokeClaw → 电池 → 后台耗电管理 → 允许\n\n【OPPO/一加/realme】\n1. 自启动管理：设置 → 应用 → 自启动管理 → PokeClaw → 开启\n2. 后台运行：设置 → 电池 → 更多设置 → 优化电池使用 → PokeClaw → 不优化\n\n【vivo/iQOO】\n1. 自启动：设置 → 应用与权限 → 自启动 → PokeClaw → 开启\n2. 后台运行：设置 → 电池 → 后台耗电管理 → PokeClaw → 允许后台运行\n\n【三星】\n1. 电池优化：设置 → 电池 → 后台使用限制 → 从不休眠的应用 → 添加PokeClaw\n2. 自运行：设置 → 应用 → PokeClaw → 电池 → 允许后台活动\n\n设置完成后请重启应用并重新开启无障碍服务</string>
     <string name="xiaomi_tip_button">一键打开无障碍设置</string>
 </resources>
