@@ -54,8 +54,8 @@ android {
         applicationId = "io.agents.pokeclaw"
         minSdk = 28
         targetSdk = 36
-        versionCode = readLocalOrEnvInt("POKECLAW_VERSION_CODE", 30)
-        versionName = readLocalOrEnvString("POKECLAW_VERSION_NAME", "0.8.0")
+        versionCode = readLocalOrEnvInt("POKECLAW_VERSION_CODE", 31)
+        versionName = readLocalOrEnvString("POKECLAW_VERSION_NAME", "0.8.1")
         buildConfigField("String", "VERSION_INFO", getVersionGit())
         buildConfigField("String", "APP_ORIGIN", "\"ROWENxAI by jacxzhang | github.com/jacxzhang/ROWENxAI\"")
         buildConfigField("String", "BUILD_FINGERPRINT", "\"${getBuildFingerprint()}\"")
