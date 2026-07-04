@@ -1,4 +1,4 @@
-﻿// Copyright 2026 PokeClaw (agents.io). All rights reserved.
+// Copyright 2026 PokeClaw (agents.io). All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
 package io.agents.pokeclaw.agent
@@ -19,10 +19,10 @@ data class CloudModel(
 )
 
 enum class ModelTier(val stars: String, val label: String) {
-    LITE("\u2606", "Lite"),       // 鈽?
-    FAST("\u2605", "Fast"),       // 鈽?
-    SMART("\u2605\u2605", "Smart"),     // 鈽呪槄
-    PRO("\u2605\u2605\u2605", "Pro")    // 鈽呪槄鈽?
+    LITE("\u2606", "Lite"),       // ☆
+    FAST("\u2605", "Fast"),       // ★
+    SMART("\u2605\u2605", "Smart"),     // ★★
+    PRO("\u2605\u2605\u2605", "Pro")    // ★★★
 }
 
 enum class CloudProvider(
@@ -55,6 +55,9 @@ enum class CloudProvider(
         defaultBaseUrl = "https://generativelanguage.googleapis.com/v1beta",
         models = listOf(
             CloudModel("gemini-2.5-flash", "Gemini 2.5 Flash", 0.15, 0.60, ModelTier.FAST, 1_000_000, recommended = true),
+            CloudModel("gemini-2.5-pro", "Gemini 2.5 Pro", 1.25, 10.00, ModelTier.PRO, 1_000_000),
+        )
+    ),
     DEEPSEEK(
         displayName = "DeepSeek",
         defaultBaseUrl = "https://api.deepseek.com/v1",
@@ -90,10 +93,6 @@ enum class CloudProvider(
             CloudModel("glm-4-plus", "GLM-4 Plus", 5.00, 5.00, ModelTier.PRO, 128_000),
         )
     ),
-
-            CloudModel("gemini-2.5-pro", "Gemini 2.5 Pro", 1.25, 10.00, ModelTier.PRO, 1_000_000),
-        )
-    ),
     CUSTOM(
         displayName = "Custom",
         defaultBaseUrl = "",
@@ -120,4 +119,3 @@ enum class CloudProvider(
         }
     }
 }
-

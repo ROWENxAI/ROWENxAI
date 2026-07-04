@@ -1,4 +1,4 @@
-﻿// Copyright 2026 PokeClaw (agents.io). All rights reserved.
+// Copyright 2026 PokeClaw (agents.io). All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
 package io.agents.pokeclaw.ui.settings
@@ -53,6 +53,7 @@ class ChannelConfigActivity : BaseActivity() {
         findViewById<CommonToolbar>(R.id.toolbar).apply {
             setTitle(when (channelType) {
                 ChannelType.DISCORD -> getString(R.string.channel_config_discord_title)
+                ChannelType.FEISHU -> getString(R.string.settings_feishu)
                 ChannelType.TELEGRAM -> getString(R.string.channel_config_telegram_title)
             })
             showBackButton(true) { finish() }
@@ -68,6 +69,7 @@ class ChannelConfigActivity : BaseActivity() {
         val ivToggle = findViewById<ImageView>(R.id.ivTogglePassword)
 
         when (channelType) {
+            ChannelType.FEISHU,
             ChannelType.DISCORD -> {
                 tvTip.text = getString(R.string.channel_config_discord_tip)
                 tvLabel1.text = "Bot Token"
@@ -127,6 +129,7 @@ class ChannelConfigActivity : BaseActivity() {
         val value2 = etInput2.text.toString().trim()
 
         when (channelType) {
+            ChannelType.FEISHU,
             ChannelType.DISCORD -> {
                 KVUtils.setDiscordBotToken(value1)
             }
@@ -138,6 +141,7 @@ class ChannelConfigActivity : BaseActivity() {
         // Reconnect only the corresponding channel; do not affect other channels
         when (channelType) {
             ChannelType.DISCORD -> ChannelManager.reinitDiscordFromStorage()
+            ChannelType.FEISHU -> {}
             ChannelType.TELEGRAM -> ChannelManager.reinitTelegramFromStorage()
         }
 
@@ -155,7 +159,9 @@ class ChannelConfigActivity : BaseActivity() {
         finish()
     }
 
-    enum class ChannelType { DISCORD, TELEGRAM, FEISHU }
+    enum class ChannelType {
+        DISCORD, TELEGRAM, FEISHU
+    }
 
     /**
      * Channel config result
@@ -221,4 +227,3 @@ class ChannelConfigActivity : BaseActivity() {
         }
     }
 }
-

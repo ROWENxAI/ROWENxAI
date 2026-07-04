@@ -1,4 +1,4 @@
-﻿// Copyright 2026 PokeClaw (agents.io). All rights reserved.
+// Copyright 2026 PokeClaw (agents.io). All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
 package io.agents.pokeclaw.ui.settings
@@ -52,7 +52,7 @@ class SettingsActivity : BaseActivity() {
         }
     }
 
-    // Permission menu items 鈥?kept for onResume refresh
+    // Permission menu items — kept for onResume refresh
     private var permAccessibility: io.agents.pokeclaw.widget.MenuItem? = null
     private var permNotification: io.agents.pokeclaw.widget.MenuItem? = null
     private var permNotifAccess: io.agents.pokeclaw.widget.MenuItem? = null
@@ -96,7 +96,7 @@ class SettingsActivity : BaseActivity() {
         // Override XML backgrounds with ThemeManager colors
         val contentFrame = findViewById<android.view.ViewGroup>(android.R.id.content)
         contentFrame?.setBackgroundColor(themeColors.bg)
-        // Root LinearLayout has android:background="@color/colorBgPrimary" 鈥?override it
+        // Root LinearLayout has android:background="@color/colorBgPrimary" — override it
         (contentFrame?.getChildAt(0) as? android.view.View)?.setBackgroundColor(themeColors.bg)
 
         initToolbar()
@@ -340,7 +340,7 @@ class SettingsActivity : BaseActivity() {
         )
         menuItems[SettingsViewModel.MenuAction.LLM_CONFIG.name]?.setLeadingIconColor(getColor(R.color.colorTextPrimary))
 
-        // 浠诲姟棰勭畻 (inline in model group)
+        // 任务预算 (inline in model group)
         modelGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_recent_history,
             title = getString(R.string.settings_task_budget),
@@ -350,7 +350,7 @@ class SettingsActivity : BaseActivity() {
             setTrailingText(io.agents.pokeclaw.agent.TaskBudget.describeCurrentBudget())
         }
 
-        // Global Prompt (#45) 鈥?user-defined persistent instructions
+        // Global Prompt (#45) — user-defined persistent instructions
         globalPromptItem = modelGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_edit,
             title = getString(R.string.global_prompt_title),
@@ -374,7 +374,7 @@ class SettingsActivity : BaseActivity() {
         globalPromptItem?.setLeadingIconColor(getColor(R.color.colorTextPrimary))
         refreshGlobalPromptStatus()
 
-        // Custom Local Model URL (#36) 鈥?advanced: lets users add their own model download URL
+        // Custom Local Model URL (#36) — advanced: lets users add their own model download URL
         customModelUrlItem = modelGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_share,
             title = getString(R.string.custom_local_model_url_title),
@@ -447,13 +447,13 @@ class SettingsActivity : BaseActivity() {
 
         toolsGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_manage,
-            title = "绠＄悊宸ュ叿",
+            title = "管理工具",
             onClick = {
-                Toast.makeText(this, "宸插惎鐢?12 涓伐鍏凤紝宸ュ叿绠＄悊鍗冲皢涓婄嚎銆?, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "已启用 12 个工具，工具管理即将上线。", Toast.LENGTH_SHORT).show()
             },
             showDivider = false
         ).apply {
-            setTrailingText("宸插惎鐢?12 涓?)
+            setTrailingText("已启用 12 个")
         }
 
         // Remote Control
@@ -462,7 +462,7 @@ class SettingsActivity : BaseActivity() {
 
         remoteGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_send,
-            title = "Telegram 鏈哄櫒浜?,
+            title = "Telegram 机器人",
             onClick = {
                 channelConfigLauncher.launch(ChannelConfigActivity.ChannelType.TELEGRAM)
             },
@@ -493,10 +493,10 @@ class SettingsActivity : BaseActivity() {
         remoteGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_myplaces,
             title = getString(R.string.settings_web_dashboard),
-            onClick = { channelConfigLauncher.launch(ChannelConfigActivity.ChannelType.FEISHU) },
+            onClick = { },
             showDivider = false
         ).apply {
-            setTrailingText(if (KVUtils.getFeishuBotToken().isNotEmpty()) getString(R.string.common_bound) else getString(R.string.common_unbound))
+            setTrailingText(getString(R.string.settings_coming_soon))
         }
 
         // About
@@ -505,8 +505,8 @@ class SettingsActivity : BaseActivity() {
 
         aboutGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_info_details,
-            title = "PokeClaw锛堝簲鐢級",
-            onClick = { channelConfigLauncher.launch(ChannelConfigActivity.ChannelType.FEISHU) },
+            title = "PokeClaw（应用）",
+            onClick = { },
             showDivider = true
         ).apply {
             setTrailingText("v${io.agents.pokeclaw.BuildConfig.VERSION_NAME}")
@@ -532,7 +532,7 @@ class SettingsActivity : BaseActivity() {
 
         aboutGroup.addMenuItem(
             leadingIcon = android.R.drawable.ic_menu_share,
-            title = "GitHub 浠ｇ爜鎵樼",
+            title = "GitHub 代码托管",
             onClick = {
                 startActivity(Intent(Intent.ACTION_VIEW, "https://github.com/jacxzhang/ROWENxAI".toUri()))
             },
@@ -545,35 +545,35 @@ class SettingsActivity : BaseActivity() {
             leadingIcon = android.R.drawable.ic_menu_compass,
             title = getString(R.string.settings_author),
             onClick = {
-                startActivity(Intent(Intent.ACTION_VIEW, "mqqwpa://im/chat?chat_type=wpa&uin=476790060".toUri()))  // TODO: 鏇挎崲涓轰綘鐨勫叕浼楀彿閾炬帴
+                startActivity(Intent(Intent.ACTION_VIEW, "https://mp.weixin.qq.com".toUri()))  // TODO: 替换为你的公众号链接
             },
             showDivider = false
         ).apply {
-            setTrailingText("缃楁仼xAI")
+            setTrailingText("QQ: 476790060")
         }
     }
 
     private fun reportBug() {
         buildSupportBundle(
-            preparingToast = "姝ｅ湪鍑嗗闂鎶ュ憡鈥?
+            preparingToast = "正在准备问题报告…"
         ) { report ->
             AlertDialog.show(
                 context = this@SettingsActivity,
-                title = "闂鎶ュ憡宸插氨缁?,
+                title = "问题报告已就绪",
                 message = """
                     ${report.name} is ready.
 
-                    鎵撳紑 GitHub Issue to file the bug now.
-                    If your browser or GitHub app makes attachment upload awkward, tap 鍒嗕韩 ZIP instead and send the report manually.
+                    打开 GitHub Issue to file the bug now.
+                    If your browser or GitHub app makes attachment upload awkward, tap 分享 ZIP instead and send the report manually.
                 """.trimIndent(),
-                actionTitle = "鎵撳紑 GitHub 闂",
-                cancelTitle = "鍒嗕韩 ZIP",
+                actionTitle = "打开 GitHub 问题",
+                cancelTitle = "分享 ZIP",
                 onAction = { openGitHubIssue(report) },
                 onCancel = {
                     shareReportFile(
                         report = report,
-                        chooserTitle = "鍒嗕韩闂鎶ュ憡 ZIP",
-                        subject = "PokeClaw 闂鎶ュ憡 ${io.agents.pokeclaw.BuildConfig.VERSION_NAME}",
+                        chooserTitle = "分享问题报告 ZIP",
+                        subject = "PokeClaw 问题报告 ${io.agents.pokeclaw.BuildConfig.VERSION_NAME}",
                         body = """
                             Attach this ZIP to your GitHub issue:
                             https://github.com/jacxzhang/ROWENxAI/issues/new
@@ -586,13 +586,13 @@ class SettingsActivity : BaseActivity() {
 
     private fun shareDebugReport() {
         buildSupportBundle(
-            preparingToast = "姝ｅ湪鍑嗗璋冭瘯鎶ュ憡鈥?,
+            preparingToast = "正在准备调试报告…",
         ) { report ->
             shareReportFile(
                 report = report,
-                chooserTitle = "鍒嗕韩璋冭瘯鎶ュ憡",
-                subject = "PokeClaw 璋冭瘯鎶ュ憡 ${io.agents.pokeclaw.BuildConfig.VERSION_NAME}",
-                body = "鎶ュ憡 PokeClaw 闂鏃惰闄勪笂姝よ皟璇曟姤鍛娿€?
+                chooserTitle = "分享调试报告",
+                subject = "PokeClaw 调试报告 ${io.agents.pokeclaw.BuildConfig.VERSION_NAME}",
+                body = "报告 PokeClaw 问题时请附上此调试报告。"
             )
         }
     }
@@ -610,8 +610,8 @@ class SettingsActivity : BaseActivity() {
             }.onSuccess { report ->
                 onReportReady(report)
             }.onFailure { error ->
-                XLog.e("SettingsActivity", "鏋勫缓璋冭瘯鎶ュ憡澶辫触", error)
-                Toast.makeText(this@SettingsActivity, "鏋勫缓璋冭瘯鎶ュ憡澶辫触", Toast.LENGTH_LONG).show()
+                XLog.e("SettingsActivity", "构建调试报告失败", error)
+                Toast.makeText(this@SettingsActivity, "构建调试报告失败", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -621,7 +621,7 @@ class SettingsActivity : BaseActivity() {
             .buildUpon()
             .appendQueryParameter(
                 "title",
-                "[闂] ${Build.MANUFACTURER} ${Build.MODEL} - "
+                "[问题] ${Build.MANUFACTURER} ${Build.MODEL} - "
             )
             .appendQueryParameter("body", buildGitHubIssueBody(report))
             .build()
@@ -629,11 +629,11 @@ class SettingsActivity : BaseActivity() {
             startActivity(Intent(Intent.ACTION_VIEW, issueUri))
             Toast.makeText(
                 this,
-                "椤甸潰鎵撳紑鍚庯紝灏?${report.name} 闄勫姞鍒?GitHub 闂",
+                "页面打开后，将 ${report.name} 附加到 GitHub 问题",
                 Toast.LENGTH_LONG
             ).show()
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, "娌℃湁鍙墦寮€ GitHub 鐨勫簲鐢?, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "没有可打开 GitHub 的应用", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -684,7 +684,7 @@ class SettingsActivity : BaseActivity() {
         try {
             startActivity(Intent.createChooser(intent, chooserTitle))
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this@SettingsActivity, "娌℃湁鍙垎浜姤鍛婄殑搴旂敤", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@SettingsActivity, "没有可分享报告的应用", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -792,12 +792,12 @@ class SettingsActivity : BaseActivity() {
         }
 
         val tokenLabel = android.widget.TextView(this).apply {
-            text = "姣忎换鍔℃渶澶?token 鏁?
+            text = "每任务最大 token 数"
             setTextColor(getColor(R.color.colorTextPrimary))
         }
         layout.addView(tokenLabel)
 
-        val tokenOptions = arrayOf("涓嶉檺", "10K", "50K", "100K", "200K", "250K", "500K")
+        val tokenOptions = arrayOf("不限", "10K", "50K", "100K", "200K", "250K", "500K")
         val tokenValues = arrayOf<Int?>(null, 10_000, 50_000, 100_000, 200_000, 250_000, 500_000)
         val selectedTokenIndex = when (currentTokens) {
             null -> 0
@@ -815,21 +815,21 @@ class SettingsActivity : BaseActivity() {
         layout.addView(tokenSpinner)
 
         val costLabel = android.widget.TextView(this).apply {
-            text = "\n姣忎换鍔℃渶楂樿垂鐢紙USD锛?
+            text = "\n每任务最高费用（USD）"
             setTextColor(getColor(R.color.colorTextPrimary))
         }
         layout.addView(costLabel)
 
         val costInput = android.widget.EditText(this).apply {
             inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
-            hint = "鐣欑┖=涓嶈璐圭敤涓婇檺"
+            hint = "留空=不设费用上限"
             setText(currentCost?.let { String.format("%.2f", it) } ?: "")
             setTextColor(getColor(R.color.colorTextPrimary))
         }
         layout.addView(costInput)
 
         android.app.AlertDialog.Builder(this)
-            .setTitle("浠诲姟棰勭畻")
+            .setTitle("任务预算")
             .setView(layout)
             .setPositiveButton(getString(R.string.llm_save)) { _, _ ->
                 val newTokens = tokenValues[tokenSpinner.selectedItemPosition]
@@ -845,13 +845,10 @@ class SettingsActivity : BaseActivity() {
                 }
 
                 val summary = io.agents.pokeclaw.agent.TaskBudget.describeCurrentBudget()
-                Toast.makeText(this, "棰勭畻: $summary", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "预算: $summary", Toast.LENGTH_SHORT).show()
                 recreate()
             }
             .setNegativeButton(getString(R.string.dialog_cancel), null)
             .show()
     }
 }
-
-
-

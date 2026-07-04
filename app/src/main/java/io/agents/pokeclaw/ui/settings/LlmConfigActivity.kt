@@ -1,10 +1,8 @@
-﻿// Copyright 2026 PokeClaw (agents.io). All rights reserved.
+// Copyright 2026 PokeClaw (agents.io). All rights reserved.
 // Licensed under the Apache License, Version 2.0.
 
 package io.agents.pokeclaw.ui.settings
 
-import android.content.Intent
-import android.net.Uri
 import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
@@ -105,7 +103,7 @@ class LlmConfigActivity : BaseActivity() {
             }
         }
 
-        // Active model 鈥?show what is ACTUALLY active based on provider
+        // Active model — show what is ACTUALLY active based on provider
         if (resolvedConfig.activeMode == ActiveModelMode.LOCAL) {
             val activeState = LocalModelManager.resolveActiveModelState(this, resolvedConfig.local)
             activeModelName.text = activeState.displayName
@@ -123,13 +121,13 @@ class LlmConfigActivity : BaseActivity() {
             if (cloudModel.isNotEmpty()) {
                 activeModelName.text = cloudModel
                 val providerName = resolvedConfig.activeCloud.provider.displayName
-                activeModelMeta.text = "$providerName 路 Cloud"
-                activeModelStatus.text = "鈼?Connected"
+                activeModelMeta.text = "$providerName · Cloud"
+                activeModelStatus.text = "● Connected"
                 activeModelStatus.setTextColor(getColor(R.color.colorSuccessPrimary))
             } else {
                 activeModelName.text = getString(R.string.llm_no_model_selected)
                 activeModelMeta.text = getString(R.string.llm_configure_cloud_below)
-                activeModelStatus.text = "鈼?Not configured"
+                activeModelStatus.text = "● Not configured"
                 activeModelStatus.setTextColor(Color.parseColor("#8b949e"))
             }
         }
@@ -148,13 +146,13 @@ class LlmConfigActivity : BaseActivity() {
 
         if (resolvedConfig.defaultCloud.isConfigured) {
             defaultCloudName.text = resolvedConfig.defaultCloud.modelName
-            defaultCloudMeta.text = "${resolvedConfig.defaultCloud.provider.displayName} 路 Cloud"
-            defaultCloudStatus.text = "鈼?Ready"
+            defaultCloudMeta.text = "${resolvedConfig.defaultCloud.provider.displayName} · Cloud"
+            defaultCloudStatus.text = "● Ready"
             defaultCloudStatus.setTextColor(getColor(R.color.colorSuccessPrimary))
         } else {
             defaultCloudName.text = getString(R.string.llm_no_default_cloud)
             defaultCloudMeta.text = getString(R.string.llm_configure_cloud_below)
-            defaultCloudStatus.text = "鈼?Not configured"
+            defaultCloudStatus.text = "● Not configured"
             defaultCloudStatus.setTextColor(Color.parseColor("#8b949e"))
         }
 
@@ -208,8 +206,8 @@ class LlmConfigActivity : BaseActivity() {
             info.addView(nameTV)
 
             val descTV = TextView(this).apply {
-                val baseText = "${model.sizeBytes / 1_000_000} MB 路 ${model.minRamGb}GB+ RAM"
-                text = if (supportedOnDevice) baseText else "$baseText 路 This phone reports ${deviceSupport.deviceRamGb}GB"
+                val baseText = "${model.sizeBytes / 1_000_000} MB · ${model.minRamGb}GB+ RAM"
+                text = if (supportedOnDevice) baseText else "$baseText · This phone reports ${deviceSupport.deviceRamGb}GB"
                 textSize = 12f
                 setTextColor(if (supportedOnDevice) Color.parseColor("#8b949e") else getColor(R.color.colorWarningPrimary))
             }
@@ -221,7 +219,7 @@ class LlmConfigActivity : BaseActivity() {
             if (downloaded) {
                 if (isActive) {
                     val check = TextView(this).apply {
-                        text = if (supportedOnDevice) "鉁?Active" else "鈿?Active"
+                        text = if (supportedOnDevice) "✓ Active" else "⚠ Active"
                         textSize = 12f
                         setTextColor(if (supportedOnDevice) getColor(R.color.colorSuccessPrimary) else getColor(R.color.colorWarningPrimary))
                     }
@@ -229,7 +227,7 @@ class LlmConfigActivity : BaseActivity() {
                 } else {
                     if (isDefaultLocal) {
                         row.addView(TextView(this).apply {
-                            text = "鉁?Default"
+                            text = "✓ Default"
                             textSize = 12f
                             setTextColor(getColor(R.color.colorSuccessPrimary))
                             setPadding(dp(12), dp(6), dp(12), dp(6))
@@ -269,7 +267,7 @@ class LlmConfigActivity : BaseActivity() {
 
                     if (availability.source == LocalModelManager.AvailabilitySource.MANAGED_DOWNLOAD) {
                         val delBtn = TextView(this).apply {
-                            text = "馃棏"
+                            text = "🗑"
                             textSize = 16f
                             setPadding(dp(8), dp(4), dp(4), dp(4))
                             alpha = 0.4f
@@ -285,7 +283,7 @@ class LlmConfigActivity : BaseActivity() {
             } else {
                 if (supportedOnDevice) {
                     val dlBtn = TextView(this).apply {
-                        text = "鈫?Download"
+                        text = "↓ Download"
                         textSize = 13f
                         setTextColor(getColor(R.color.colorInfoPrimary))
                         setPadding(dp(12), dp(6), dp(12), dp(6))
@@ -319,7 +317,7 @@ class LlmConfigActivity : BaseActivity() {
                                     override fun onError(error: String) {
                                         runOnUiThread {
                                             isDownloading = false
-                                            text = "鈫?Download"
+                                            text = "↓ Download"
                                             isEnabled = true
                                             Toast.makeText(this@LlmConfigActivity, error, Toast.LENGTH_LONG).show()
                                         }
@@ -346,7 +344,7 @@ class LlmConfigActivity : BaseActivity() {
         // Storage info
         updateStorageInfo()
 
-        // Cloud LLM 鈥?Provider tabs + model cards
+        // Cloud LLM — Provider tabs + model cards
         setupCloudLlm(tc)
     }
 
@@ -364,7 +362,7 @@ class LlmConfigActivity : BaseActivity() {
         val allocated = 4000L // 4GB rough estimate
         val pct = (mbUsed * 100 / allocated).toInt().coerceAtMost(100)
 
-        findViewById<TextView>(R.id.tvStorageInfo).text = "$count model${if (count != 1) "s" else ""} 路 ${mbUsed} MB"
+        findViewById<TextView>(R.id.tvStorageInfo).text = "$count model${if (count != 1) "s" else ""} · ${mbUsed} MB"
         findViewById<ProgressBar>(R.id.progressStorage).progress = pct
         findViewById<TextView>(R.id.tvStorageDetail).text = "${mbUsed} MB of ${allocated} MB allocated"
     }
@@ -477,7 +475,7 @@ class LlmConfigActivity : BaseActivity() {
 
                 // Radio dot
                 val dot = TextView(this).apply {
-                    text = if (isSelected) "鈼? else "鈼?
+                    text = if (isSelected) "◉" else "○"
                     textSize = 16f
                     setTextColor(if (isSelected) getColor(R.color.colorBrandPrimary) else Color.parseColor("#8b949e"))
                     setPadding(0, 0, dp(10), 0)
@@ -502,7 +500,7 @@ class LlmConfigActivity : BaseActivity() {
                 // Recommended badge
                 if (model.recommended) {
                     nameRow.addView(TextView(this).apply {
-                        text = " 鈿?
+                        text = " ⚡"
                         textSize = 12f
                     })
                 }
@@ -510,7 +508,7 @@ class LlmConfigActivity : BaseActivity() {
 
                 // Price + tier
                 info.addView(TextView(this).apply {
-                    text = "${model.tier.stars} ${model.tier.label} 路 \$${model.inputPricePerM} / \$${model.outputPricePerM} per 1M"
+                    text = "${model.tier.stars} ${model.tier.label} · \$${model.inputPricePerM} / \$${model.outputPricePerM} per 1M"
                     textSize = 11f
                     setTextColor(Color.parseColor("#8b949e"))
                 })
@@ -522,7 +520,7 @@ class LlmConfigActivity : BaseActivity() {
         }
         renderModels()
 
-        // Provider tab switch 鈥?load per-provider saved API key
+        // Provider tab switch — load per-provider saved API key
         fun switchProvider(provider: CloudProvider, colors: ThemeManager.ChatColors) {
             selectedProvider = provider
             selectedModelId = when {
@@ -562,12 +560,12 @@ class LlmConfigActivity : BaseActivity() {
                     if (apiKey.length < 10) throw RuntimeException("API key too short")
                     if (modelId.isEmpty()) throw RuntimeException("No model selected")
                     runOnUiThread {
-                        tvStatus.text = "鉁?Ready to save"
+                        tvStatus.text = "✓ Ready to save"
                         tvStatus.setTextColor(getColor(R.color.colorSuccessPrimary))
                     }
                 } catch (e: Exception) {
                     runOnUiThread {
-                        tvStatus.text = "鉁?${e.message}"
+                        tvStatus.text = "✗ ${e.message}"
                         tvStatus.setTextColor(getColor(R.color.colorErrorPrimary))
                     }
                 }
@@ -609,75 +607,11 @@ class LlmConfigActivity : BaseActivity() {
         // Active model card is already set in onCreate based on actual provider
     }
 
-
-        // Quick setup buttons for free/cheap Chinese cloud models
-        findViewById<TextView>(R.id.btnQuickZhipu)?.setOnClickListener {
-            openQuickSetup(CloudProvider.ZHIPU, "glm-4-flash", "https://open.bigmodel.cn/")
-        }
-        findViewById<TextView>(R.id.btnQuickDeepseek)?.setOnClickListener {
-            openQuickSetup(CloudProvider.DEEPSEEK, "deepseek-chat", "https://platform.deepseek.com/")
-        }
-        findViewById<TextView>(R.id.btnQuickQwen)?.setOnClickListener {
-            openQuickSetup(CloudProvider.QWEN, "qwen-turbo", "https://dashscope.aliyun.com/")
-        }
-        findViewById<TextView>(R.id.btnQuickKimi)?.setOnClickListener {
-            openQuickSetup(CloudProvider.MOONSHOT, "moonshot-v1-8k", "https://platform.moonshot.cn/")
-        }
-
     /**
      * Keep focused fields visible above the IME on edge-to-edge layouts.
      * `adjustResize` alone is not reliable here because the ScrollView content
      * still needs extra bottom inset + explicit scroll after the keyboard opens.
      */
-
-    private fun openQuickSetup(provider: CloudProvider, modelId: String, registrationUrl: String) {
-        // Set the selected provider and model
-        selectedProvider = provider
-        selectedModelId = modelId
-        
-        // Update UI to reflect the selection
-        updateProviderSelection(provider)
-        updateModelSelection(modelId)
-        
-        // Show a toast with instructions
-        Toast.makeText(this, getString(R.string.llm_quick_selected, provider.displayName, modelId), Toast.LENGTH_LONG).show()
-        
-        // Open registration page in browser
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(registrationUrl)))
-        } catch (e: Exception) {
-            Toast.makeText(this, getString(R.string.llm_quick_no_browser), Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun updateProviderSelection(provider: CloudProvider) {
-        // Update the provider radio button selection
-        val providerRadioGroup = findViewById<RadioGroup>(R.id.rgProvider)
-        when (provider) {
-            CloudProvider.OPENAI -> providerRadioGroup?.check(R.id.rbOpenai)
-            CloudProvider.ANTHROPIC -> providerRadioGroup?.check(R.id.rbAnthropic)
-            CloudProvider.GOOGLE -> providerRadioGroup?.check(R.id.rbGoogle)
-            CloudProvider.DEEPSEEK -> providerRadioGroup?.check(R.id.rbDeepseek)
-            CloudProvider.QWEN -> providerRadioGroup?.check(R.id.rbQwen)
-            CloudProvider.MOONSHOT -> providerRadioGroup?.check(R.id.rbMoonshot)
-            CloudProvider.ZHIPU -> providerRadioGroup?.check(R.id.rbZhipu)
-            CloudProvider.CUSTOM -> providerRadioGroup?.check(R.id.rbCustom)
-        }
-    }
-
-    private fun updateModelSelection(modelId: String) {
-        // Update the model radio button selection
-        val modelRadioGroup = findViewById<RadioGroup>(R.id.rgModels)
-        // Find and select the radio button with the matching model ID
-        for (i in 0 until modelRadioGroup?.childCount ?: 0) {
-            val radioButton = modelRadioGroup?.getChildAt(i) as? RadioButton
-            if (radioButton?.tag == modelId) {
-                radioButton?.isChecked = true
-                break
-            }
-        }
-    }
-
     private fun installKeyboardAwareScrolling(scrollView: ScrollView, fields: List<EditText>) {
         val baseBottomPadding = scrollView.paddingBottom
 
@@ -726,6 +660,3 @@ class LlmConfigActivity : BaseActivity() {
 
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
 }
-
-
-

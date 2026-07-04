@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                         android:layout_height="40dp"
                         android:background="@drawable/bg_avatar_ai"
                         android:gravity="center"
-                        android:text="馃"
+                        android:text="🦞"
                         android:textSize="22dp" />
 
                     <LinearLayout
@@ -132,7 +132,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:gravity="center"
-                            android:text="馃摫"
+                            android:text="📱"
                             android:textSize="18dp" />
 
                         <LinearLayout
@@ -195,7 +195,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:gravity="center"
-                            android:text="鈽侊笍"
+                            android:text="☁️"
                             android:textSize="18dp" />
 
                         <LinearLayout
@@ -262,7 +262,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
-            <!-- Storage section hidden 鈥?not useful for end users -->
+            <!-- Storage section hidden — not useful for end users -->
             <TextView
                 android:id="@+id/tvStorageInfo"
                 android:layout_width="0dp"
@@ -280,108 +280,6 @@
                 android:layout_height="0dp"
                 android:visibility="gone" />
 
-            <!-- Quick Setup for Free Models -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:paddingHorizontal="4dp"
-                android:paddingBottom="8dp"
-                android:text="@string/llm_quick_setup"
-                android:textColor="@color/colorTextSecondary"
-                android:textSize="13dp"
-                android:textStyle="bold" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/colorContainerBrighten"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/llm_quick_setup_desc"
-                        android:textColor="@color/colorTextTertiary"
-                        android:textSize="12dp"
-                        android:layout_marginBottom="12dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:id="@+id/btnQuickZhipu"
-                            android:layout_width="0dp"
-                            android:layout_height="44dp"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="4dp"
-                            android:background="@drawable/bg_edit_text"
-                            android:gravity="center"
-                            android:text="@string/llm_quick_zhipu"
-                            android:textColor="@color/colorBrandPrimary"
-                            android:textSize="11dp"
-                            android:lineSpacingExtra="2dp" />
-
-                        <TextView
-                            android:id="@+id/btnQuickDeepseek"
-                            android:layout_width="0dp"
-                            android:layout_height="44dp"
-                            android:layout_weight="1"
-                            android:layout_marginStart="4dp"
-                            android:background="@drawable/bg_edit_text"
-                            android:gravity="center"
-                            android:text="@string/llm_quick_deepseek"
-                            android:textColor="@color/colorBrandPrimary"
-                            android:textSize="11dp"
-                            android:lineSpacingExtra="2dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/btnQuickQwen"
-                            android:layout_width="0dp"
-                            android:layout_height="44dp"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="4dp"
-                            android:background="@drawable/bg_edit_text"
-                            android:gravity="center"
-                            android:text="@string/llm_quick_qwen"
-                            android:textColor="@color/colorBrandPrimary"
-                            android:textSize="11dp"
-                            android:lineSpacingExtra="2dp" />
-
-                        <TextView
-                            android:id="@+id/btnQuickKimi"
-                            android:layout_width="0dp"
-                            android:layout_height="44dp"
-                            android:layout_weight="1"
-                            android:layout_marginStart="4dp"
-                            android:background="@drawable/bg_edit_text"
-                            android:gravity="center"
-                            android:text="@string/llm_quick_kimi"
-                            android:textColor="@color/colorBrandPrimary"
-                            android:textSize="11dp"
-                            android:lineSpacingExtra="2dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
             <!-- Cloud LLM -->
             <TextView
                 android:layout_width="wrap_content"
@@ -579,5 +477,3 @@
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
-
-
