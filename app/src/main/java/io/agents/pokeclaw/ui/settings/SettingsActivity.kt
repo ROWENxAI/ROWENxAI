@@ -545,7 +545,7 @@ class SettingsActivity : BaseActivity() {
             leadingIcon = android.R.drawable.ic_menu_compass,
             title = getString(R.string.settings_author),
             onClick = {
-                startActivity(Intent(Intent.ACTION_VIEW, "https://mp.weixin.qq.com/cgi-bin/profile?action=getprofile&__biz=gh_29e1843b90e8".toUri()))  // TODO: 鏇挎崲涓轰綘鐨勫叕浼楀彿閾炬帴
+                startActivity(Intent(Intent.ACTION_VIEW, "mqqwpa://im/chat?chat_type=wpa&uin=476790060".toUri()))  // TODO: 鏇挎崲涓轰綘鐨勫叕浼楀彿閾炬帴
             },
             showDivider = false
         ).apply {
@@ -852,5 +852,6 @@ class SettingsActivity : BaseActivity() {
             .show()
     }
 }
+
 
 
