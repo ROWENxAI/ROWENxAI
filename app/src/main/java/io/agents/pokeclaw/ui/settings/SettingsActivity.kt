@@ -545,7 +545,7 @@ class SettingsActivity : BaseActivity() {
             leadingIcon = android.R.drawable.ic_menu_compass,
             title = getString(R.string.settings_author),
             onClick = {
-                startActivity(Intent(Intent.ACTION_VIEW, "https://mp.weixin.qq.com".toUri()))  // TODO: 替换为你的公众号链接
+                try { startActivity(Intent(Intent.ACTION_VIEW, "mqqwpa://im/chat?chat_type=wpa&uin=476790060".toUri())) } catch (e: Exception) { Toast.makeText(this, "QQ: 476790060", Toast.LENGTH_SHORT).show() }
             },
             showDivider = false
         ).apply {
