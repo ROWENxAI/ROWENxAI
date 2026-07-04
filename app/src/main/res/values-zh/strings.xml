@@ -400,4 +400,10 @@
     <string name="menu_theme">主题</string>
     <string name="dialog_cancel">取消</string>
     
+
+    <!-- 小米/红米手机提示 -->
+    <string name="xiaomi_tip_title">⚠️ 小米/红米手机用户必看</string>
+    <string name="xiaomi_tip_desc">无障碍服务需要额外设置才能正常运行：</string>
+    <string name="xiaomi_tip_steps">1. 关闭MIUI优化：设置 → 更多设置 → 开发者选项 → 关闭MIUI优化\n\n2. 允许后台运行：设置 → 应用 → PokeClaw → 省电策略 → 无限制\n\n3. 开启自启动：设置 → 应用 → PokeClaw → 自管理 → 开启自启动\n\n4. 重新开启无障碍：设置 → 更多设置 → 无障碍 → PokeClaw</string>
+    <string name="xiaomi_tip_button">一键打开无障碍设置</string>
 </resources>

@@ -400,4 +400,10 @@
     <string name="menu_theme">Theme</string>
     <string name="dialog_cancel">Cancel</string>
     
+
+    <!-- Xiaomi/Redmi phone tip -->
+    <string name="xiaomi_tip_title">⚠️ Xiaomi/Redmi Users Must Read</string>
+    <string name="xiaomi_tip_desc">Accessibility service requires extra setup:</string>
+    <string name="xiaomi_tip_steps">1. Disable MIUI Optimization: Settings → Additional Settings → Developer Options → Disable MIUI Optimization\n\n2. Allow Background: Settings → Apps → PokeClaw → Battery Saver → No Restrictions\n\n3. Enable Auto-start: Settings → Apps → PokeClaw → Self-Management → Enable Auto-start\n\n4. Re-enable Accessibility: Settings → Additional Settings → Accessibility → PokeClaw</string>
+    <string name="xiaomi_tip_button">Open Accessibility Settings</string>
 </resources>

@@ -217,6 +217,22 @@ class SettingsActivity : BaseActivity() {
     }
 
     private fun initMenuGroups() {
+        // 小米/红米手机提示
+        val xiaomiTipLayout = findViewById<android.widget.LinearLayout>(R.id.xiaomiTipLayout)
+        val manufacturer = android.os.Build.MANUFACTURER.lowercase()
+        if (manufacturer.contains("xiaomi") || manufacturer.contains("redmi") || manufacturer.contains("poco")) {
+            xiaomiTipLayout?.visibility = android.view.View.VISIBLE
+        }
+
+        // 一键打开无障碍设置按钮
+        findViewById<android.widget.TextView>(R.id.btnOpenAccessibility)?.setOnClickListener {
+            try {
+                startActivity(android.content.Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS))
+            } catch (e: Exception) {
+                Toast.makeText(this, "无法打开无障碍设置", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         // Permissions
         val permissionsGroup = findViewById<MenuGroup>(R.id.permissionsGroup)
         permissionsGroup.setTitle(getString(R.string.settings_permissions))
